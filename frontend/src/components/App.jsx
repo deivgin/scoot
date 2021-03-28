@@ -1,36 +1,5 @@
-import styled from "styled-components";
-import { connect } from "react-redux";
-import {
-  increaseCounter,
-  decreaseCounter,
-} from "../redux/Counter/counter.actions";
+import Counter from "./elements/Counter";
 
-function App(props) {
-  return (
-    <Wrapper>
-      <div>Count: {props.count}</div>
-      <button onClick={() => props.increaseCounter()}>+</button>
-      <button onClick={() => props.decreaseCounter()}>-</button>
-    </Wrapper>
-  );
+export default function App(props) {
+  return <Counter />;
 }
-//styled
-const Wrapper = styled.div`
-  background: #333;
-`;
-
-//redux
-const mapStateToProps = (state) => {
-  return {
-    count: state.counter.count,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    increaseCounter: () => dispatch(increaseCounter()),
-    decreaseCounter: () => dispatch(decreaseCounter()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
