@@ -18,7 +18,7 @@ function Counter(props) {
 
 //styled
 const Wrapper = styled.div`
-  background: #333;
+  background-color: ${(props) => props.theme.colors.powderWhite};
 `;
 
 //redux
