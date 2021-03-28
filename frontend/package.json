@@ -13,6 +13,7 @@
     "react-scripts": "4.0.3",
     "react-three-fiber": "^5.3.22",
     "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.9",
     "styled-components": "^5.2.1",
     "three": "^0.126.1",
     "web-vitals": "^1.1.1"
