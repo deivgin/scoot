@@ -1,5 +1,4 @@
-import Counter from "./elements/Counter";
-
+import Home from "./pages/Home";
 export default function App(props) {
-  return <Counter />;
+  return <Home />;
 }
