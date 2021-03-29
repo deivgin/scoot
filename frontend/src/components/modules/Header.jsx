@@ -2,11 +2,14 @@ import styled from "styled-components";
 import Logo from "../elements/Logo";
 import Cart from "../elements/Cart";
 import Hamburg from "../elements/Hamburg";
+import { useState } from "react";
 
 export default function Header() {
+  const [navOpen, setNavOpen] = useState(false);
+
   return (
     <StyledHeader>
-      <Hamburg />
+      <Hamburg open={navOpen} setOpen={setNavOpen} />
       <Logo>ScooT</Logo>
       <Cart />
     </StyledHeader>
