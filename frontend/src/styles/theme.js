@@ -1,15 +1,18 @@
 const theme = {
-  colors: {
-    powderWhite: "#FFFDF9",
-    persianGreen: "#06B49A",
-    lightBlue: "#AFDBD2",
-    onyx: "#36313D",
+  color: {
+    primary: "#414141",
+    primaryLight: "#525252",
+    primaryDark: "#313131",
+    white: "#F2F7F4",
+    black: "#000",
   },
-  fonts: ["sans-serif", "Roboto"],
-  fontSizes: {
-    small: "1em",
-    medium: "2em",
-    large: "3em",
+  fontSize: {
+    small: "1.2em",
+    medium: "2.4em",
+    large: "3.6em",
+  },
+  margin: {
+    header: "2rem",
   },
 };
 
