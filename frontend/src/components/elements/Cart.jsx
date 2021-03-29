@@ -18,7 +18,7 @@ const StyledCart = styled.button`
   align-items: center;
   cursor: pointer;
   margin-right: ${({ theme }) => theme.margin.header};
-  color: ${({ theme }) => theme.colors.primaryLight};
+  color: ${({ theme }) => theme.color.primaryLight};
 `;
 
 const Icon = styled(FiShoppingCart)`

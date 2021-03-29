@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -7,6 +7,11 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     font-size: 62.5%;
     background-color: #F2F7F4;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 `;
 

@@ -20,7 +20,7 @@ const StyledHamburg = styled.button`
 const Line = styled.div`
   width: 2rem;
   height: 0.1rem;
-  background: ${({ theme }) => theme.colors.primaryLight};
+  background: ${({ theme }) => theme.color.primaryLight};
   margin: 0.6rem 0;
   transition: all 0.1s linear;
   position: relative;
