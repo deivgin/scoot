@@ -1,8 +1,8 @@
-import styled, { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   body {
-    margin: 0;
+    margin: 0 15rem; //change with mediaqueries
     padding: 0;
     font-family: 'Roboto', sans-serif;
     font-size: 62.5%;
