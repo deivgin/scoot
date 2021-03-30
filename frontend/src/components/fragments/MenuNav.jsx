@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export default function MenuNav({ open }) {
@@ -14,6 +14,8 @@ export default function MenuNav({ open }) {
 //Styles
 const Nav = styled.nav`
   position: absolute;
+  z-index: 10;
+  background-color: ${({ theme }) => theme.color.white};
   top: 6rem;
   left: 4rem;
   display: flex;

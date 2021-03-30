@@ -1,14 +1,8 @@
 import styled from "styled-components";
-import Header from "../modules/Header";
 import HomeCanvas from "../modules/HomeCanvas";
 
 export default function Home() {
-  return (
-    <>
-      <Header />
-      <HomeCanvas />
-    </>
-  );
+  return <div>Homepage</div>;
 }
 
 //Styles

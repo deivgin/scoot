@@ -1,10 +1,12 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Signin from "./pages/Signin";
+import Header from "./modules/Header";
 
-export default function App(props) {
+export default function App() {
   return (
     <Router>
+      <Header />
       <Switch>
         <Route path="/">
           <Home />
