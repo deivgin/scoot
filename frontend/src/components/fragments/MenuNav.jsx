@@ -6,7 +6,7 @@ export default function MenuNav({ open }) {
     <Nav open={open}>
       <Link to="/shop">Shop</Link>
       <Link to="/about">About</Link>
-      <Link to="/sign-in">Sign In</Link>
+      <Link to="/signin">Sign In</Link>
     </Nav>
   );
 }
