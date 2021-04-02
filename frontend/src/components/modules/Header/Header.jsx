@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import Logo from "../elements/Logo";
-import Cart from "../elements/Cart";
-import Hamburg from "../elements/Hamburg";
+import Logo from "../../elements/Logo";
+import Cart from "../../elements/Cart";
+import Hamburg from "../../elements/Hamburg";
 import { useState } from "react";
-import MenuNav from "../fragments/MenuNav";
+import MenuNav from "./MenuNav";
 
 export default function Header() {
   const [navOpen, setNavOpen] = useState(false);
