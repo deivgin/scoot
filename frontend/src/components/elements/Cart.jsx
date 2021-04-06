@@ -22,10 +22,10 @@ const StyledCart = styled.button`
 `;
 
 const Icon = styled(FiShoppingCart)`
-  font-size: 1.8rem;
+  font-size: 1.25rem;
   padding-right: 0.25rem;
 `;
 
 const Counter = styled.span`
-  font-size: 1.8rem;
+  font-size: 1rem;
 `;

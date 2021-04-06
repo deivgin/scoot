@@ -1,3 +1,5 @@
+import SignUp from "../modules/SignUp";
+
 export default function Signin() {
-  return <div>sign in</div>;
+  return <SignUp />;
 }

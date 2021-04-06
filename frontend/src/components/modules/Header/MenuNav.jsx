@@ -6,13 +6,13 @@ export default function MenuNav({ open }) {
     <Nav open={open}>
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/shop">Shop</Link>
         </li>
         <li>
           <Link to="/about">About</Link>
         </li>
         <li>
-          <Link to="/shop">Shop</Link>
+          <Link to="/signin">Sign up</Link>
         </li>
       </ul>
     </Nav>
@@ -24,7 +24,7 @@ const Nav = styled.nav`
   position: absolute;
   z-index: 10;
   background-color: ${({ theme }) => theme.color.white};
-  top: 6rem;
+  top: 4rem;
   left: 4rem;
   display: flex;
   flex-direction: column;

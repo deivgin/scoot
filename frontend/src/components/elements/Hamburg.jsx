@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import PropTypes from "prop-types";
 
 export default function Hamburg({ open, setOpen }) {
   return (
@@ -33,9 +32,3 @@ const Line = styled.div`
     transform: ${({ open }) => (open ? "rotate(-45deg)" : "rotate(0)")};
   }
 `;
-
-//Proptypes
-Hamburg.propTypes = {
-  open: PropTypes.bool.isRequired,
-  isOpen: PropTypes.func.isRequired,
-};
