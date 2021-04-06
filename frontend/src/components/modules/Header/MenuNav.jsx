@@ -4,9 +4,17 @@ import { Link } from "react-router-dom";
 export default function MenuNav({ open }) {
   return (
     <Nav open={open}>
-      <Link to="/shop">Shop</Link>
-      <Link to="/about">About</Link>
-      <Link to="/signin">Sign In</Link>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+        <li>
+          <Link to="/shop">Shop</Link>
+        </li>
+      </ul>
     </Nav>
   );
 }
@@ -27,12 +35,19 @@ const Nav = styled.nav`
 
   a {
     color: ${({ theme }) => theme.color.primary};
-    margin: 1rem;
-    margin-right: 2rem;
     border-bottom: 0.2rem dashed transparent;
-
     :hover {
       border-bottom: 0.2rem dashed ${({ theme }) => theme.color.primary};
+    }
+  }
+
+  ul {
+    list-style: none;
+    margin: 1rem;
+    padding: 0;
+
+    li:not(last-child) {
+      margin-bottom: 1rem;
     }
   }
 `;
