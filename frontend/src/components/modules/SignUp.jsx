@@ -1,10 +1,21 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Button from "../elements/Button";
 import Input from "../elements/Input";
 
 export default function SignUp() {
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formValues);
+  };
+
   return (
-    <StyledForm>
+    <StyledForm onSubmit={handleSubmit}>
       <h2>Sign Up</h2>
       <Input
         name="email"
@@ -12,12 +23,20 @@ export default function SignUp() {
         label="email"
         placeholder="email"
         autoComplete="off"
+        value={formValues.email}
+        onChange={(e) =>
+          setFormValues((values) => ({ ...values, email: e.target.value }))
+        }
       />
       <Input
         name="password"
         type="password"
         label="password"
         placeholder="password"
+        value={formValues.password}
+        onChange={(e) =>
+          setFormValues((values) => ({ ...values, password: e.target.value }))
+        }
       />
       <Button type="submit">sign up</Button>
     </StyledForm>
