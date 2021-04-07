@@ -1,20 +1,9 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
     <StyledFooter>
-      <ul>
-        <li>
-          <Link to="/home">Home</Link>
-        </li>
-        <li>
-          <Link to="/about">About</Link>
-        </li>
-        <li>
-          <Link to="/signin">Profile</Link>
-        </li>
-      </ul>
+      <h1>Footer</h1>
     </StyledFooter>
   );
 }
@@ -24,4 +13,12 @@ const StyledFooter = styled.footer`
   width: 100%;
   background-color: ${({ theme }) => theme.color.primaryDark};
   color: ${({ theme }) => theme.color.white};
+  text-align: center;
+
+  grid-column: padding-left-start / padding-right-end;
+  grid-row: footer-start / footer-end;
+
+  ul {
+    margin: 0;
+  }
 `;

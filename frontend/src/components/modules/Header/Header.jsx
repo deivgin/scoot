@@ -27,4 +27,7 @@ const StyledHeader = styled.header`
   justify-content: space-between;
   border-bottom: 0.1rem solid ${({ theme }) => theme.color.black};
   background-color: inherit;
+
+  grid-column: content-start/content-end;
+  grid-row: header-start / header-end;
 `;

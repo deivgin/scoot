@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { MainLayout as Layout } from "../styles/layout";
 import Home from "./pages/Home";
@@ -12,22 +13,29 @@ export default function App() {
     <Router>
       <Layout>
         <Header />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/shop">
-            <Shop />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/signin">
-            <Signin />
-          </Route>
-        </Switch>
+        <MainContent>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/shop">
+              <Shop />
+            </Route>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/signin">
+              <Signin />
+            </Route>
+          </Switch>
+        </MainContent>
         <Footer />
       </Layout>
     </Router>
   );
 }
+
+const MainContent = styled.main`
+  grid-column: content-start / content-end;
+  grid-row: content-start / content-end;
+`;
