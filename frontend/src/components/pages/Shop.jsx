@@ -17,8 +17,8 @@ export default function Shop() {
 //Styles
 const Container = styled.div`
   height: 70vh;
-  border: 0.1rem solid ${({ theme }) => theme.color.primaryLight};
   display: grid;
+  grid-template-columns: 50% 50%;
 `;
 
 const PropertyContainer = styled.div`

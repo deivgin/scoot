@@ -36,6 +36,7 @@ export default function App() {
 }
 
 const MainContent = styled.main`
+  border: 0.1rem solid ${({ theme }) => theme.color.primaryLight};
   grid-column: content-start / content-end;
   grid-row: content-start / content-end;
 `;
