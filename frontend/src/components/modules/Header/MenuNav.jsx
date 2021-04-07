@@ -30,7 +30,7 @@ const Nav = styled.nav`
   flex-direction: column;
   font-size: ${({ theme }) => theme.fontSize.medium};
   border: 0.1rem solid ${({ theme }) => theme.color.black};
-  transition: transform 0.2s ease-in-out;
+  transition: ease-in-out 0.2s;
   transform: ${({ open }) => (open ? "translateY(0)" : "translateY(-10rem)")};
 
   a {

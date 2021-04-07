@@ -37,7 +37,7 @@ const StyledInput = styled.input`
   font-size: ${({ theme }) => theme.fontSize.medium};
   border: 0.1rem solid ${({ theme }) => theme.color.primary};
   padding: 0.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
 
   :focus {
     outline: none;

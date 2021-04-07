@@ -49,8 +49,11 @@ const StyledForm = styled.form`
   border: 0.1rem solid ${({ theme }) => theme.color.primaryLight};
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   margin: 0 6rem;
   margin-top: 3rem;
+
+  & + ${Button} {
+    margin: 2rem;
+  }
 `;
