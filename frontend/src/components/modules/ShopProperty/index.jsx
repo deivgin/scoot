@@ -1,32 +1,35 @@
 import styled from "styled-components";
 import Button from "../../elements/Button";
-import { GiCarWheel } from "react-icons/gi";
-import { MdTexture } from "react-icons/md";
-import { AiOutlineControl } from "react-icons/ai";
-import { IoSpeedometerOutline } from "react-icons/io5";
 import Options from "./Options";
 
 export default function ShopProperty() {
   return (
     <Container>
-      <Button type="property">
-        <GiCarWheel />
-      </Button>
-      <Button type="property">
-        <MdTexture />
-      </Button>
-      <Button type="property">
-        <AiOutlineControl />
-      </Button>
-      <Button type="property">
-        <IoSpeedometerOutline />
-      </Button>
       <Options />
+      <Price>NaN€</Price>
+      <OrderButton>order</OrderButton>
     </Container>
   );
 }
 
 //Styles
 const Container = styled.div`
-  border: 0.1rem solid ${({ theme }) => theme.color.primaryLight};
+  display: grid;
+  grid-template-columns:
+    [pad-left-start] 3rem [pad-left-end content-start]
+    auto [content-end pad-right-start] 3rem [pad-right-end];
+  grid-template-rows:
+    [options-start] 1fr [options-end price-start]
+    0.25fr [price-end button-start] 0.25fr [button-end];
+  border-left: 0.1rem solid ${({ theme }) => theme.color.primary};
+`;
+
+const OrderButton = styled(Button)`
+  grid-column: content-start / content-end;
+  grid-row: button-start / button-end;
+`;
+
+const Price = styled.span`
+  grid-column: content-start / content-end;
+  grid-row: price-start / price-end;
 `;

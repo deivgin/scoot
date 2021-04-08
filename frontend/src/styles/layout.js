@@ -8,7 +8,7 @@ const MainLayout = styled.div`
     10vw [padding-right-end];
   grid-template-rows:
     [header-start] 3.5rem
-    [header-end content-start] 80vh
+    [header-end content-start] minmax(30rem, 80vh)
     [content-end footer-start] 3rem [footer-end];
   row-gap: 3rem;
 `;
