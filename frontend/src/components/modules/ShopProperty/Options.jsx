@@ -6,9 +6,11 @@ import { AiOutlineControl } from "react-icons/ai";
 import { IoSpeedometerOutline } from "react-icons/io5";
 
 export default function Options({ handleChange, checkedItem }) {
+  const change = () => console.log("change")
+
   return (
     <Container>
-      <Button>
+      <Button type="button" onClick={change}>
         <GiCarWheel />
       </Button>
       <Button>
