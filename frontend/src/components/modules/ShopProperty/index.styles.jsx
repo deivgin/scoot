@@ -1,4 +1,7 @@
-const Container = styled.form`
+import Button from "../../elements/Button";
+import styled from "styled-components";
+
+const Form = styled.form`
   display: grid;
   grid-template-columns:
     [pad-left-start] 3rem [pad-left-end content-start]
@@ -26,12 +29,14 @@ const Price = styled.span`
   margin-bottom: 0.5rem;
 `;
 
-const Container = styled.div`
+const Tabs = styled.div`
   border: 0.1rem solid ${({ theme }) => theme.color.primaryLight};
   grid-column: content-start / content-end;
   grid-row: options-start / options-end;
   margin: 0.5rem;
 `;
+
+export { Form, OrderButton, Price, Tabs };
 
 //Button icons
 // import { GiCarWheel } from "react-icons/gi";

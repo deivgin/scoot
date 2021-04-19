@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "controls",
+  "info": {
+    "name": "Controls"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "price": {
+      "type": "decimal"
+    }
+  }
+}

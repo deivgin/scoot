@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
-export default function Button({ children, className }) {
-  return <StyledButton className={className}>{children}</StyledButton>;
+export default function Button({ children, className, ...props }) {
+  return (
+    <StyledButton {...props} className={className}>
+      {children}
+    </StyledButton>
+  );
 }
 
 //Styles
