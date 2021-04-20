@@ -1,20 +1,22 @@
+import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { Tabs } from "./index.styles";
 import { GiCarWheel } from "react-icons/gi";
 import { MdTexture } from "react-icons/md";
 import { AiOutlineControl } from "react-icons/ai";
 import { IoSpeedometerOutline } from "react-icons/io5";
 import Button from "../../elements/Button";
 import Option from "./Option";
+import Loader from "react-loader-spinner";
 
 export default function Options() {
-  const [currTab, setCurrTab] = useState();
   const [wheels, setWheels] = useState([]);
   const [controls, setControls] = useState([]);
   const [materials, setMaterials] = useState([]);
   const [speed, setSpeed] = useState([]);
+  const [currTab, setCurrTab] = useState([]);
 
   useEffect(() => {
+    let isCanceled = false;
     const getWheels = async () => {
       const response = await fetch("http://localhost:1337/wheels");
       const data = await response.json();
@@ -39,6 +41,7 @@ export default function Options() {
     getControls();
     getMaterials();
     getSpeed();
+    return () => (isCanceled = true);
   }, []);
 
   return (
@@ -55,17 +58,22 @@ export default function Options() {
       <Button type="button" onClick={() => setCurrTab(speed)}>
         <IoSpeedometerOutline />
       </Button>
-      {!currTab ? (
-        <h3>Choose Option</h3>
-      ) : (
-        currTab.map((option) => (
-          <Option key={option.id} name={option.name} price={option.price} />
-        ))
-      )}
+      {currTab.map((option) => (
+        <Option key={option.id} name={option.name} price={option.price} />
+      ))}
     </Tabs>
   );
 }
 
-// <Button onClick={click} type="button">
-//         <GiCarWheel />
-//       </Button>
+//Styles
+const Tabs = styled.div`
+  border: 0.1rem solid ${({ theme }) => theme.color.primaryLight};
+  grid-column: content-start / content-end;
+  grid-row: options-start / options-end;
+  margin: 0.5rem;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  row-gap: 0.5rem;
+`;

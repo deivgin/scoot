@@ -29,14 +29,7 @@ const Price = styled.span`
   margin-bottom: 0.5rem;
 `;
 
-const Tabs = styled.div`
-  border: 0.1rem solid ${({ theme }) => theme.color.primaryLight};
-  grid-column: content-start / content-end;
-  grid-row: options-start / options-end;
-  margin: 0.5rem;
-`;
-
-export { Form, OrderButton, Price, Tabs };
+export { Form, OrderButton, Price };
 
 //Button icons
 // import { GiCarWheel } from "react-icons/gi";
