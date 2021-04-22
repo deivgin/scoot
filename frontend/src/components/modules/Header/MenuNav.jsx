@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export default function MenuNav({ open }) {
+export default function MenuNav({ open, menuRef }) {
   return (
     <Nav open={open}>
-      <ul>
+      <ul ref={menuRef}>
         <li>
           <Link to="/shop">Shop</Link>
         </li>

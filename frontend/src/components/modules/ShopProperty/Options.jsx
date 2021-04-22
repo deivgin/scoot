@@ -6,7 +6,6 @@ import { AiOutlineControl } from "react-icons/ai";
 import { IoSpeedometerOutline } from "react-icons/io5";
 import Button from "../../elements/Button";
 import Option from "./Option";
-import Loader from "react-loader-spinner";
 
 export default function Options() {
   const [wheels, setWheels] = useState([]);
