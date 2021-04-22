@@ -22,4 +22,8 @@ const StyledButton = styled.button`
     color: ${({ theme }) => theme.color.primaryLight};
     cursor: pointer;
   }
+
+  :active {
+    border: 0.1rem dashed ${({ theme }) => theme.color.primaryLight};
+  }
 `;
