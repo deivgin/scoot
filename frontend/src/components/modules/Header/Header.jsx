@@ -4,14 +4,20 @@ import Cart from "../../elements/Cart";
 import Hamburg from "../../elements/Hamburg";
 import { useState } from "react";
 import MenuNav from "./MenuNav";
+import useOutsideClick from "../../../hooks/useOutsideClick";
+import { useRef } from "react";
 
 export default function Header() {
   const [navOpen, setNavOpen] = useState(false);
+  const menuRef = useRef();
+  useOutsideClick(menuRef, () => {
+    if (navOpen) setNavOpen(false);
+  });
 
   return (
     <StyledHeader>
       <Hamburg open={navOpen} setOpen={setNavOpen} />
-      {navOpen && <MenuNav open={navOpen} />}
+      {navOpen && <MenuNav open={navOpen} menuRef={menuRef} />}
       <Logo>ScooT</Logo>
       <Cart />
     </StyledHeader>

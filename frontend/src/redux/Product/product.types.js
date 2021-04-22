@@ -1,0 +1,6 @@
+const WHEELS = "WHEELS";
+const MATERIAL = "MATERIAL";
+const SPEED = "SPEED";
+const CONTROLS = "CONTROLS";
+
+export { WHEELS, MATERIAL, SPEED, CONTROLS };

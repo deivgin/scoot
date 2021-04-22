@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/speeds",
+      "handler": "speed.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/speeds/count",
+      "handler": "speed.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/speeds/:id",
+      "handler": "speed.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/speeds",
+      "handler": "speed.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/speeds/:id",
+      "handler": "speed.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/speeds/:id",
+      "handler": "speed.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -14,6 +14,9 @@ const StyledHamburg = styled.button`
   background: transparent;
   border: none;
   margin-left: ${({ theme }) => theme.margin.header};
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const Line = styled.div`

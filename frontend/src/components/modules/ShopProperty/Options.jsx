@@ -1,29 +1,29 @@
 import styled from "styled-components";
+import { GiCarWheel } from "react-icons/gi";
+// import { MdTexture } from "react-icons/md";
+// import { AiOutlineControl } from "react-icons/ai";
+// import { IoSpeedometerOutline } from "react-icons/io5";
 import Button from "../../elements/Button";
 
 export default function Options() {
-  const clickTest = () => console.log("click");
   return (
-    <>
-      <h2>heading based on propery</h2>
-      <hr />
-      <Container>
-        <Option onClick={clickTest}>Option 1</Option>
-        <Option>Option 2</Option>
-        <Option>Option 3</Option>
-        <Option>Option 4</Option>
-      </Container>
-    </>
+    <Tabs>
+      <Button type="button">
+        <GiCarWheel />
+      </Button>
+    </Tabs>
   );
 }
 
 //Styles
-const Container = styled.div`
-  font-size: ${({ theme }) => theme.fontSize.small};
-  display: flex;
-  flex-direction: column;
-`;
+const Tabs = styled.div`
+  border: 0.1rem solid ${({ theme }) => theme.color.primaryLight};
+  grid-column: content-start / content-end;
+  grid-row: options-start / options-end;
+  margin: 0.5rem;
 
-const Option = styled(Button)`
-  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  row-gap: 0.5rem;
 `;
