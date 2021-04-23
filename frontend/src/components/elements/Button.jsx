@@ -11,7 +11,7 @@ export default function Button({ children, className, ...props }) {
 //Styles
 const StyledButton = styled.button`
   background-color: transparent;
-  border: 0.1rem solid ${({ theme }) => theme.color.primary};
+  border: 0.1rem ${(props) => (props.active ? "dashed" : "solid")}${({ theme }) => theme.color.primary};
   font-size: ${({ theme }) => theme.fontSize.medium};
   letter-spacing: 0.25rem;
   padding: 0.5rem;
