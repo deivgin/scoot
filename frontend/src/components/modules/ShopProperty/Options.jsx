@@ -1,26 +1,51 @@
 import styled from "styled-components";
 import { GiCarWheel } from "react-icons/gi";
-// import { MdTexture } from "react-icons/md";
-// import { AiOutlineControl } from "react-icons/ai";
-// import { IoSpeedometerOutline } from "react-icons/io5";
+import { MdTexture } from "react-icons/md";
+import { AiOutlineControl } from "react-icons/ai";
+import { IoSpeedometerOutline } from "react-icons/io5";
 import Button from "../../elements/Button";
-import useFetch from "../../../hooks/useFetch";
+import useTabs from "../../../hooks/useTabs";
+import Option from "./Option";
+import { useEffect } from "react";
 
 export default function Options() {
-  const wheels = useFetch("http://localhost:1337/wheels", {});
-  console.log(wheels.response);
+  const { tabs, currTab, setCurrTab } = useTabs();
+
+  useEffect(() => {
+    tabs && setCurrTab(tabs[0]);
+  }, []);
+
+  const generateButtons = (name) => {
+    switch (name) {
+      case "wheels":
+        return <GiCarWheel />;
+      case "speeds":
+        return <IoSpeedometerOutline />;
+      case "materials":
+        return <MdTexture />;
+      case "controls":
+        return <AiOutlineControl />;
+      default:
+        return <div>Button</div>;
+    }
+  };
   return (
     <Tabs>
-      <Button type="button">
-        <GiCarWheel />
-      </Button>
-      {wheels.response ? (
-        wheels.response.map((item) => {
-          return <div key={item.id}>{item.name}</div>;
-        })
-      ) : (
-        <div>Loading...</div>
-      )}
+      {!tabs && <div>Loading...</div>}
+      {tabs &&
+        tabs.map((tab) => (
+          <Button
+            key={tab.id}
+            type="button"
+            active={tab.name === currTab.name}
+            onClick={() => setCurrTab(tab)}
+          >
+            {generateButtons(tab.name)}
+          </Button>
+        ))}
+      {currTab.data.response.map((option) => (
+        <Option name={option.name} />
+      ))}
     </Tabs>
   );
 }
