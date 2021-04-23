@@ -2,8 +2,12 @@ import { Form, OrderButton, Price } from "./index.styles";
 import Options from "./Options";
 
 export default function ShopProperty() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("submited");
+  };
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Options />
       <Price>NaN€</Price>
       <OrderButton>order</OrderButton>
