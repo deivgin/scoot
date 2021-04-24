@@ -1,4 +1,4 @@
-import { WHEELS, MATERIAL, SPEED, CONTROLS } from "./product.types";
+import { WHEELS, MATERIAL, SPEED, CONTROLS, TOTAL } from "./product.types";
 
 const changeWheels = (option) => {
   return {
@@ -28,4 +28,10 @@ const changeControls = (option) => {
   };
 };
 
-export { changeWheels, changeMaterial, changeSpeed, changeControls };
+const calcTotal = (total) => {
+  return {
+    type: TOTAL,
+  };
+};
+
+export { changeWheels, changeMaterial, changeSpeed, changeControls, calcTotal };
