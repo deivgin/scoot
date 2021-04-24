@@ -4,7 +4,7 @@ import styled from "styled-components";
 export default function Option({ name, ...props }) {
   return (
     <StyledInput>
-      <input type="radio" name="option" {...props} />
+      <input type="radio" name="option" value={name} {...props} />
       <label htmlFor="option">{name}</label>
     </StyledInput>
   );

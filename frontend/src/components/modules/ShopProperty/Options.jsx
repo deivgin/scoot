@@ -6,7 +6,7 @@ import { IoSpeedometerOutline } from "react-icons/io5";
 import Button from "../../elements/Button";
 import Option from "./Option";
 
-export default function Options({ data, handleTabChange }) {
+export default function Options({ data, product, handleTabChange }) {
   const generateButton = (name) => {
     switch (name) {
       case "wheels":

@@ -1,25 +1,31 @@
 import { WHEELS, MATERIAL, SPEED, CONTROLS } from "./product.types";
 
-export const changeWheels = () => {
+const changeWheels = (option) => {
   return {
     type: WHEELS,
+    payload: option,
   };
 };
 
-export const changeMaterial = () => {
+const changeMaterial = (option) => {
   return {
     type: MATERIAL,
+    payload: option,
   };
 };
 
-export const changeSpeed = () => {
+const changeSpeed = (option) => {
   return {
     type: SPEED,
+    payload: option,
   };
 };
 
-export const changecontrols = () => {
+const changeControls = (option) => {
   return {
     type: CONTROLS,
+    payload: option,
   };
 };
+
+export { changeWheels, changeMaterial, changeSpeed, changeControls };

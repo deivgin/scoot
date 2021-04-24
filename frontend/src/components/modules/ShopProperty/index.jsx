@@ -1,12 +1,21 @@
 import { useState, useEffect } from "react";
 import { Form, OrderButton, Price, StyledLoader } from "./index.styles";
 import Options from "./Options";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  changeWheels,
+  changeMaterial,
+  changeSpeed,
+  changeControls,
+} from "../../../redux/Product/product.actions";
 
 //Saves state of product to global Product state
 
 export default function ShopProperty() {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
+  const product = useSelector((state) => state.product);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getData = async () => {
@@ -34,9 +43,22 @@ export default function ShopProperty() {
         console.log(err);
       }
     };
+
+    const setDefaultProduct = () => {
+      const wheel = data.tabs.find((item) => item.name === "wheels");
+      const speed = data.tabs.find((item) => item.name === "speed");
+      const control = data.tabs.find((item) => item.name === "controls");
+      const material = data.tabs.find((item) => item.name === "material");
+      dispatch(changeWheels(wheel.data[0].name));
+      dispatch(changeMaterial(material.data[0].name));
+      dispatch(changeSpeed(speed.data[0].name));
+      dispatch(changeControls(control.data[0].name));
+    };
     getData();
+    data ? setDefaultProduct() : setIsLoading(true);
   }, []);
 
+  console.log(product);
   const handleTabChange = (tab) => setData({ ...data, currTab: tab });
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,7 +76,11 @@ export default function ShopProperty() {
           />
         ) : (
           <>
-            <Options data={data} handleTabChange={handleTabChange} />
+            <Options
+              data={data}
+              handleTabChange={handleTabChange}
+              product={product}
+            />
             <Price>NaN€</Price>
             <OrderButton>order</OrderButton>
           </>
