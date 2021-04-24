@@ -1,9 +1,10 @@
 import { TOTAL, CHANGE_VALUE } from "./product.types";
 
-const changeValue = (option) => {
+const changeValue = (part, option) => {
   return {
     type: CHANGE_VALUE,
-    payload: option,
+    option,
+    part,
   };
 };
 

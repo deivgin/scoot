@@ -62,10 +62,11 @@ export default function ShopProperty() {
     alert("submited");
   };
 
+  console.log(product);
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        {isLoading || !data ? (
+        {isLoading || !data || product ? (
           <StyledLoader
             type="ThreeDots"
             color="#414141"

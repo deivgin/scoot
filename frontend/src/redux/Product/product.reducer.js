@@ -13,7 +13,7 @@ const reducer = (state = INITIAL_STATE, action) => {
     case CHANGE_VALUE: {
       return {
         ...state,
-        [action.part]: action.payload,
+        [action.part]: action.option,
       };
     }
     case TOTAL: {
