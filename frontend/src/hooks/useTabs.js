@@ -1,5 +1,5 @@
 import useFetch from "./useFetch";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function useTabs() {
   const url = "http://localhost:1337";

@@ -65,3 +65,5 @@ const StyledInput = styled.div`
 //     getSpeed();
 //     return () => (isCanceled = true);
 //   }, []);
+
+//code 2.0

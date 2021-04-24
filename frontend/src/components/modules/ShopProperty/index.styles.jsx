@@ -1,5 +1,6 @@
 import Button from "../../elements/Button";
 import styled from "styled-components";
+import Loader from "react-loader-spinner";
 
 const Form = styled.form`
   display: grid;
@@ -29,7 +30,14 @@ const Price = styled.span`
   margin-bottom: 0.5rem;
 `;
 
-export { Form, OrderButton, Price };
+const StyledLoader = styled(Loader)`
+  grid-column: content-start / content-end;
+  grid-row: options-start / option-end;
+  align-self: center;
+  justify-self: center;
+`;
+
+export { Form, OrderButton, Price, StyledLoader };
 
 //Button icons
 // import { GiCarWheel } from "react-icons/gi";

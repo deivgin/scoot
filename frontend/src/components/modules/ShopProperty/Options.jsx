@@ -1,51 +1,35 @@
 import styled from "styled-components";
 import { GiCarWheel } from "react-icons/gi";
 import { MdTexture } from "react-icons/md";
-import { AiOutlineControl } from "react-icons/ai";
+import { AiOutlineControl, AiOutlineFileImage } from "react-icons/ai";
 import { IoSpeedometerOutline } from "react-icons/io5";
 import Button from "../../elements/Button";
-import useTabs from "../../../hooks/useTabs";
 import Option from "./Option";
-import { useEffect } from "react";
 
-export default function Options() {
-  const { tabs, currTab, setCurrTab } = useTabs();
-
-  useEffect(() => {
-    tabs && setCurrTab(tabs[0]);
-  }, []);
-
-  const generateButtons = (name) => {
+export default function Options({ data, currTab }) {
+  const generateButton = (name) => {
     switch (name) {
       case "wheels":
         return <GiCarWheel />;
-      case "speeds":
+      case "speed":
         return <IoSpeedometerOutline />;
-      case "materials":
-        return <MdTexture />;
       case "controls":
         return <AiOutlineControl />;
+      case "material":
+        return <MdTexture />;
       default:
-        return <div>Button</div>;
+        return <AiOutlineFileImage />;
     }
   };
   return (
     <Tabs>
-      {!tabs && <div>Loading...</div>}
-      {tabs &&
-        tabs.map((tab) => (
-          <Button
-            key={tab.id}
-            type="button"
-            active={tab.name === currTab.name}
-            onClick={() => setCurrTab(tab)}
-          >
-            {generateButtons(tab.name)}
-          </Button>
-        ))}
-      {currTab.data.response.map((option) => (
-        <Option name={option.name} />
+      {data.map((item, index) => (
+        <Button key={index} type="button" active={item.name === currTab.name}>
+          {generateButton(item.name)}
+        </Button>
       ))}
+
+      <Option />
     </Tabs>
   );
 }
