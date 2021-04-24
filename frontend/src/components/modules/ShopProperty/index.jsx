@@ -7,7 +7,6 @@ import Options from "./Options";
 export default function ShopProperty() {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
-  const [currTab, setCurrTab] = useState(null);
 
   useEffect(() => {
     const getData = async () => {
@@ -21,14 +20,15 @@ export default function ShopProperty() {
         const controlsData = await controlsResponse.json();
         const materialResponse = await fetch(`${url}/materials`);
         const materialData = await materialResponse.json();
-        console.log(wheelsData);
-        setData([
-          { name: "wheels", data: wheelsData },
-          { name: "speed", data: speedData },
-          { name: "controls", data: controlsData },
-          { name: "material", data: materialData },
-        ]);
-        setCurrTab(wheelsData);
+        setData({
+          currTab: { name: "wheels", data: wheelsData },
+          tabs: [
+            { name: "wheels", data: wheelsData },
+            { name: "speed", data: speedData },
+            { name: "controls", data: controlsData },
+            { name: "material", data: materialData },
+          ],
+        });
         setIsLoading(false);
       } catch (err) {
         console.log(err);
@@ -37,8 +37,7 @@ export default function ShopProperty() {
     getData();
   }, []);
 
-  console.log(data, currTab);
-
+  const handleTabChange = (tab) => setData({ ...data, currTab: tab });
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("submited");
@@ -46,7 +45,7 @@ export default function ShopProperty() {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        {isLoading || !data || !currTab ? (
+        {isLoading || !data ? (
           <StyledLoader
             type="ThreeDots"
             color="#414141"
@@ -55,7 +54,7 @@ export default function ShopProperty() {
           />
         ) : (
           <>
-            <Options data={data} currTab={currTab} />
+            <Options data={data} handleTabChange={handleTabChange} />
             <Price>NaN€</Price>
             <OrderButton>order</OrderButton>
           </>
