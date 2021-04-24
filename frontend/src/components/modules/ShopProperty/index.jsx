@@ -11,6 +11,7 @@ export default function ShopProperty() {
   const [data, setData] = useState(null);
   const product = useSelector((state) => state.product);
   const dispatch = useDispatch();
+  const [testProduct, setTestProduct] = useState();
 
   useEffect(() => {
     const getData = async () => {
@@ -38,35 +39,42 @@ export default function ShopProperty() {
         console.log(err);
       }
     };
-    const setDefaultProduct = () => {
-      const wheel = data.tabs.find((item) => item.name === "wheels");
-      const speed = data.tabs.find((item) => item.name === "speed");
-      const control = data.tabs.find((item) => item.name === "controls");
-      const material = data.tabs.find((item) => item.name === "material");
-      dispatch(changeValue("wheel", wheel.data[0]));
-      dispatch(changeValue("materials", material.data[0]));
-      dispatch(changeValue("speed", speed.data[0]));
-      dispatch(changeValue("controls", control.data[0]));
-      dispatch(calcTotal());
-    };
     getData();
-    data ? setDefaultProduct() : setIsLoading(true);
   }, []);
 
-  const handleTabChange = (tab) => setData({ ...data, currTab: tab });
-  const handleInputChange = (part, option) =>
-    dispatch(changeValue(part, option));
+  //Calc total price of product
+  const calcTotal = () => {
+    let total = 0;
+    testProduct.options.forEach((item) => (total += item.data.price));
+    setTestProduct({ ...testProduct, price: total });
+  };
+
+  const setDefaults = () => {
+    setTestProduct({
+      ...testProduct,
+      options: data.tabs.map((item) => ({
+        name: item.name,
+        data: item.data[0],
+      })),
+    });
+  };
+  //setDefaults for testProduct
+  data && !testProduct && setDefaults();
+  testProduct && !testProduct.price && calcTotal();
+  console.log(testProduct);
+
+  const handleTabs = (tab) => {
+    setData({ ...data, currTab: tab });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("submited");
   };
-
-  console.log(product);
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        {isLoading || !data || product ? (
+        {isLoading || !data ? (
           <StyledLoader
             type="ThreeDots"
             color="#414141"
@@ -75,13 +83,8 @@ export default function ShopProperty() {
           />
         ) : (
           <>
-            <Options
-              data={data}
-              handleTabChange={handleTabChange}
-              handleInputChange={handleInputChange}
-              product={product}
-            />
-            <Price>{product.price}€</Price>
+            <Options tabData={data} handleTabs={handleTabs} />
+            <Price>NaN€</Price>
             <OrderButton>order</OrderButton>
           </>
         )}

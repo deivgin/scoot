@@ -1,14 +1,10 @@
 //import PropTypes from "prop-types";
 import styled from "styled-components";
 
-export default function Option({ name, value, handleInputChange }) {
-  const handleClick = (e) => {
-    console.log(value);
-    console.log(name);
-  };
+export default function Option({ name, value }) {
   return (
     <StyledInput>
-      <input type="radio" name="option" value={value} onChange={handleClick} />
+      <input type="radio" name="option" value={value} />
       <label htmlFor="option">{name}</label>
     </StyledInput>
   );

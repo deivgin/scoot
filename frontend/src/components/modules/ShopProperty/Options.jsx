@@ -6,13 +6,7 @@ import { IoSpeedometerOutline } from "react-icons/io5";
 import Button from "../../elements/Button";
 import Option from "./Option";
 
-export default function Options({
-  data,
-  product,
-  handleTabChange,
-  handleInputChange,
-}) {
-  const partName = data.currTab.name;
+export default function Options({ tabData, handleTabs }) {
   const generateButton = (name) => {
     switch (name) {
       case "wheels":
@@ -29,27 +23,19 @@ export default function Options({
   };
   return (
     <Tabs>
-      {data.tabs.map((item, index) => (
+      {tabData.tabs.map((item, index) => (
         <Button
           key={index}
           type="button"
-          active={item.name === data.currTab.name}
-          onClick={() => handleTabChange(item)}
+          onClick={() => handleTabs(item)}
+          active={item.name === tabData.currTab.name}
         >
           {generateButton(item.name)}
         </Button>
       ))}
-      <h2>{data.currTab.name}</h2>
-      {data.currTab.data.map((item) => {
-        return (
-          <Option
-            key={item.id}
-            name={item.name}
-            value={item}
-            product={product}
-            handleInputChange={handleInputChange}
-          />
-        );
+      <h2>{tabData.currTab.name}</h2>
+      {tabData.currTab.data.map((item) => {
+        return <Option key={item.id} name={item.name} value={item} />;
       })}
     </Tabs>
   );
