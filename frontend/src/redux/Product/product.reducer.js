@@ -1,4 +1,4 @@
-import { WHEELS, MATERIAL, SPEED, CONTROLS, TOTAL } from "./product.types";
+import { TOTAL, CHANGE_VALUE } from "./product.types";
 
 const INITIAL_STATE = {
   wheels: null,
@@ -10,28 +10,10 @@ const INITIAL_STATE = {
 
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case WHEELS: {
+    case CHANGE_VALUE: {
       return {
         ...state,
-        wheels: action.payload,
-      };
-    }
-    case MATERIAL: {
-      return {
-        ...state,
-        material: action.payload,
-      };
-    }
-    case SPEED: {
-      return {
-        ...state,
-        speed: action.payload,
-      };
-    }
-    case CONTROLS: {
-      return {
-        ...state,
-        controls: action.payload,
+        [action.part]: action.payload,
       };
     }
     case TOTAL: {

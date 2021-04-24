@@ -1,29 +1,8 @@
-import { WHEELS, MATERIAL, SPEED, CONTROLS, TOTAL } from "./product.types";
+import { TOTAL, CHANGE_VALUE } from "./product.types";
 
-const changeWheels = (option) => {
+const changeValue = (option) => {
   return {
-    type: WHEELS,
-    payload: option,
-  };
-};
-
-const changeMaterial = (option) => {
-  return {
-    type: MATERIAL,
-    payload: option,
-  };
-};
-
-const changeSpeed = (option) => {
-  return {
-    type: SPEED,
-    payload: option,
-  };
-};
-
-const changeControls = (option) => {
-  return {
-    type: CONTROLS,
+    type: CHANGE_VALUE,
     payload: option,
   };
 };
@@ -34,4 +13,4 @@ const calcTotal = (total) => {
   };
 };
 
-export { changeWheels, changeMaterial, changeSpeed, changeControls, calcTotal };
+export { calcTotal, changeValue };

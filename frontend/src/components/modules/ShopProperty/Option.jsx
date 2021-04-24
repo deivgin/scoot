@@ -1,10 +1,14 @@
 //import PropTypes from "prop-types";
 import styled from "styled-components";
 
-export default function Option({ name, ...props }) {
+export default function Option({ name, value, handleInputChange }) {
+  const handleClick = (e) => {
+    console.log(value);
+    console.log(name);
+  };
   return (
     <StyledInput>
-      <input type="radio" name="option" value={name} {...props} />
+      <input type="radio" name="option" value={value} onChange={handleClick} />
       <label htmlFor="option">{name}</label>
     </StyledInput>
   );
@@ -31,3 +35,5 @@ const StyledInput = styled.div`
   label {
   }
 `;
+//checked={value.name === name}
+//

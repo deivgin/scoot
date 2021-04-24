@@ -1,7 +1,4 @@
-const WHEELS = "WHEELS";
-const MATERIAL = "MATERIAL";
-const SPEED = "SPEED";
-const CONTROLS = "CONTROLS";
 const TOTAL = "TOTAL";
+const CHANGE_VALUE = "CHANGE_VALUE";
 
-export { WHEELS, MATERIAL, SPEED, CONTROLS, TOTAL };
+export { TOTAL, CHANGE_VALUE };
