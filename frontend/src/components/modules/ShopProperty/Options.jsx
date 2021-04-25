@@ -55,12 +55,13 @@ export default function Options({ tabData, handleTabs }) {
           {generateButton(item.name)}
         </Button>
       ))}
-      <h2>{tabData.currTab.name}</h2>
+      <OptionName>{tabData.currTab.name}</OptionName>
       {tabData.currTab.data.map((item) => {
         return (
           <Option
             key={item.id}
             name={item.name}
+            price={item.price}
             value={JSON.stringify(item)}
             checked={item.name === currTabProduct.data.name}
             onChange={handleInputChange}
@@ -80,8 +81,16 @@ const Tabs = styled.div`
 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: 4.5rem 4rem repeat(4, 1fr);
   row-gap: 0.5rem;
+`;
+
+const OptionName = styled.h2`
+  grid-column: 1 / -1;
+  grid-row: 2 / 3;
+  align-self: center;
+  font-size: 1.4rem;
+  color: ${({ theme }) => theme.color.primaryDark};
 `;
 
 //PropTypes
