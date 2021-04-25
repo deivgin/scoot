@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Form, OrderButton, Price, StyledLoader } from "./index.styles";
 import Options from "./Options";
 import { useSelector, useDispatch } from "react-redux";
-import { calcTotal, changeValue } from "../../../redux/Product/product.actions";
+import { changeValue, calcTotal } from "../../../redux/Product/product.actions";
 
 //Saves state of product to global Product state
 
@@ -11,7 +11,6 @@ export default function ShopProperty() {
   const [data, setData] = useState(null);
   const product = useSelector((state) => state.product);
   const dispatch = useDispatch();
-  const [testProduct, setTestProduct] = useState();
 
   useEffect(() => {
     const getData = async () => {
@@ -42,26 +41,20 @@ export default function ShopProperty() {
     getData();
   }, []);
 
-  //Calc total price of product
-  const calcTotal = () => {
-    let total = 0;
-    testProduct.options.forEach((item) => (total += item.data.price));
-    setTestProduct({ ...testProduct, price: total });
+  const setDefaultProduct = () => {
+    dispatch(
+      changeValue(
+        data.tabs.map((item) => ({
+          name: item.name,
+          data: item.data[0],
+        }))
+      )
+    );
+    dispatch(calcTotal());
   };
 
-  const setDefaults = () => {
-    setTestProduct({
-      ...testProduct,
-      options: data.tabs.map((item) => ({
-        name: item.name,
-        data: item.data[0],
-      })),
-    });
-  };
-  //setDefaults for testProduct
-  data && !testProduct && setDefaults();
-  testProduct && !testProduct.price && calcTotal();
-  console.log(testProduct);
+  data && !product.options && setDefaultProduct();
+  console.log(product);
 
   const handleTabs = (tab) => {
     setData({ ...data, currTab: tab });

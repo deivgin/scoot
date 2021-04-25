@@ -1,0 +1,4 @@
+const CHANGE_VALUE = "CHANGE_VALUE";
+const TOTAL = "TOTAL";
+
+export { CHANGE_VALUE, TOTAL };

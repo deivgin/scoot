@@ -1,10 +1,10 @@
 //import PropTypes from "prop-types";
 import styled from "styled-components";
 
-export default function Option({ name, value }) {
+export default function Option({ name, ...props }) {
   return (
     <StyledInput>
-      <input type="radio" name="option" value={value} />
+      <input type="radio" name="option" {...props} />
       <label htmlFor="option">{name}</label>
     </StyledInput>
   );
