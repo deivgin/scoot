@@ -1,12 +1,13 @@
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { changeValue, calcTotal } from "../../../redux/Product/product.actions";
+import PropTypes from "prop-types";
+import Option from "./Option";
+import Button from "../../elements/Button";
 import { GiCarWheel } from "react-icons/gi";
 import { MdTexture } from "react-icons/md";
 import { AiOutlineControl, AiOutlineFileImage } from "react-icons/ai";
 import { IoSpeedometerOutline } from "react-icons/io5";
-import Button from "../../elements/Button";
-import Option from "./Option";
-import { useSelector, useDispatch } from "react-redux";
-import { changeValue, calcTotal } from "../../../redux/Product/product.actions";
 
 export default function Options({ tabData, handleTabs }) {
   const product = useSelector((state) => state.product);
@@ -82,3 +83,9 @@ const Tabs = styled.div`
   grid-template-rows: repeat(4, 1fr);
   row-gap: 0.5rem;
 `;
+
+//PropTypes
+Options.propTypes = {
+  tabData: PropTypes.object.isRequired,
+  handleTabs: PropTypes.func.isRequired,
+};

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { Form, OrderButton, Price, StyledLoader } from "./index.styles";
-import Options from "./Options";
 import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
 import { changeValue, calcTotal } from "../../../redux/Product/product.actions";
-
-//Saves state of product to global Product state
+import Options from "./Options";
+import Button from "../../elements/Button";
+import Loader from "react-loader-spinner";
 
 export default function ShopProperty() {
   const [isLoading, setIsLoading] = useState(true);
@@ -76,7 +76,7 @@ export default function ShopProperty() {
         ) : (
           <>
             <Options tabData={data} handleTabs={handleTabs} />
-            <Price>NaN€</Price>
+            <Price>{product.price}€</Price>
             <OrderButton>order</OrderButton>
           </>
         )}
@@ -84,3 +84,39 @@ export default function ShopProperty() {
     </>
   );
 }
+
+//Styles
+const Form = styled.form`
+  display: grid;
+  grid-template-columns:
+    [pad-left-start] 3rem [pad-left-end content-start]
+    auto [content-end pad-right-start] 3rem [pad-right-end];
+  grid-template-rows:
+    [options-start] 1fr [options-end price-start]
+    0.25fr [price-end button-start] 0.25fr [button-end];
+  border-left: 0.1rem solid ${({ theme }) => theme.color.primary};
+`;
+
+const OrderButton = styled(Button)`
+  grid-column: content-start / content-end;
+  grid-row: button-start / button-end;
+  font-size: ${({ theme }) => theme.fontSize.large};
+  margin: 0.5rem;
+`;
+
+const Price = styled.span`
+  grid-column: content-start / content-end;
+  grid-row: price-start / price-end;
+  justify-self: center;
+  align-self: end;
+  font-size: ${({ theme }) => theme.fontSize.large};
+  color: ${({ theme }) => theme.color.primary};
+  margin-bottom: 0.5rem;
+`;
+
+const StyledLoader = styled(Loader)`
+  grid-column: content-start / content-end;
+  grid-row: options-start / option-end;
+  align-self: center;
+  justify-self: center;
+`;

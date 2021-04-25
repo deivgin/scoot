@@ -1,4 +1,4 @@
-//import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 export default function Option({ name, ...props }) {
@@ -9,12 +9,6 @@ export default function Option({ name, ...props }) {
     </StyledInput>
   );
 }
-
-//PropTypes
-// Option.propTypes = {
-//   id: PropTypes.number.isRequired,
-//   name: PropTypes.string.isRequired,
-// };
 
 //Styles
 const StyledInput = styled.div`
@@ -27,9 +21,8 @@ const StyledInput = styled.div`
     border: 0.1rem dashed ${({ theme }) => theme.color.primaryLight};
     cursor: pointer;
   }
-
-  label {
-  }
 `;
-//checked={value.name === name}
-//
+//PropTypes
+Option.propTypes = {
+  name: PropTypes.string.isRequired,
+};
