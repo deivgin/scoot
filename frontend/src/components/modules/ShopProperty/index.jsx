@@ -54,7 +54,6 @@ export default function ShopProperty() {
   };
 
   data && !product.options && setDefaultProduct();
-  console.log(product);
 
   const handleTabs = (tab) => {
     setData({ ...data, currTab: tab });

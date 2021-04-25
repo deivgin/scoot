@@ -6,9 +6,14 @@ import { IoSpeedometerOutline } from "react-icons/io5";
 import Button from "../../elements/Button";
 import Option from "./Option";
 import { useSelector, useDispatch } from "react-redux";
+import { changeValue, calcTotal } from "../../../redux/Product/product.actions";
 
 export default function Options({ tabData, handleTabs }) {
   const product = useSelector((state) => state.product);
+  const dispatch = useDispatch();
+  const currTabProduct = product.options.find(
+    (item) => item.name === tabData.currTab.name
+  );
 
   const generateButton = (name) => {
     switch (name) {
@@ -24,11 +29,19 @@ export default function Options({ tabData, handleTabs }) {
         return <AiOutlineFileImage />;
     }
   };
-  console.log(tabData.currTab);
-  const currTabProduct = product.options.find(
-    (item) => item.name === tabData.currTab.name
-  );
-  console.log(currTabProduct);
+
+  const handleInputChange = (e) => {
+    const parsedValue = JSON.parse(e.target.value);
+    const foundValue = product.options.map((item) =>
+      item.name === currTabProduct.name
+        ? { name: item.name, data: parsedValue }
+        : item
+    );
+    dispatch(changeValue(foundValue));
+    dispatch(calcTotal());
+    console.log(product);
+  };
+
   return (
     <Tabs>
       {tabData.tabs.map((item, index) => (
@@ -43,7 +56,15 @@ export default function Options({ tabData, handleTabs }) {
       ))}
       <h2>{tabData.currTab.name}</h2>
       {tabData.currTab.data.map((item) => {
-        return <Option key={item.id} name={item.name} value={item} checked={item.name === currTabProduct.data.name}/>;
+        return (
+          <Option
+            key={item.id}
+            name={item.name}
+            value={JSON.stringify(item)}
+            checked={item.name === currTabProduct.data.name}
+            onChange={handleInputChange}
+          />
+        );
       })}
     </Tabs>
   );

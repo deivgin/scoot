@@ -1,4 +1,4 @@
-import { CHANGE_VALUE, TOTAL } from "./product.types";
+import { CHANGE_VALUE, TOTAL, UPDATE_VALUE } from "./product.types";
 
 const changeValue = (value) => ({
   type: CHANGE_VALUE,
@@ -9,4 +9,9 @@ const calcTotal = () => ({
   type: TOTAL,
 });
 
-export { changeValue, calcTotal };
+const updateValue = (value) => ({
+  type: UPDATE_VALUE,
+  payload: value,
+});
+
+export { changeValue, calcTotal, updateValue };

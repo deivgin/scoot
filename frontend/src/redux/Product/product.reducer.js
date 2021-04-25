@@ -1,4 +1,4 @@
-import { CHANGE_VALUE, TOTAL } from "./product.types";
+import { CHANGE_VALUE, TOTAL, UPDATE_VALUE } from "./product.types";
 
 const INITIAL_STATE = {
   options: null,
@@ -19,6 +19,11 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         price: total,
+      };
+    }
+    case UPDATE_VALUE: {
+      return {
+        ...state,
       };
     }
     default:
