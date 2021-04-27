@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export default function Button({ children, className, ...props }) {
+export default function Button({ inverted, children, className, ...props }) {
   return (
-    <StyledButton {...props} className={className}>
+    <StyledButton inverted={inverted} {...props} className={className}>
       {children}
     </StyledButton>
   );
@@ -10,20 +10,35 @@ export default function Button({ children, className, ...props }) {
 
 //Styles
 const StyledButton = styled.button`
-  background-color: transparent;
-  border: 0.1rem ${(props) => (props.active ? "dashed" : "solid")}${({ theme }) => theme.color.primary};
-  font-size: ${({ theme }) => theme.fontSize.medium};
-  letter-spacing: 0.25rem;
-  padding: 0.5rem;
-  color: ${({ theme }) => theme.color.primary};
+  background-color: ${({ inverted }) =>
+    inverted
+      ? ({ theme }) => theme.color.white
+      : ({ theme }) => theme.color.black};
+  font-size: ${({ theme }) => theme.fontSize.small};
+  padding: 0.5rem 2rem;
+  border: 3px solid
+    ${({ inverted }) =>
+      inverted
+        ? ({ theme }) => theme.color.white
+        : ({ theme }) => theme.color.black};
+  border-radius: 10px;
+  transition: 0.2s;
+  transform: translateY(0);
 
   :hover {
-    border: 0.1rem dashed ${({ theme }) => theme.color.primaryLight};
-    color: ${({ theme }) => theme.color.primaryLight};
     cursor: pointer;
+    color: ${({ inverted }) =>
+      inverted
+        ? ({ theme }) => theme.color.white
+        : ({ theme }) => theme.color.black};
+    background-color: ${({ inverted }) =>
+      inverted
+        ? ({ theme }) => theme.color.black
+        : ({ theme }) => theme.color.white};
+    transform: translateY(-0.1rem);
   }
 
   :active {
-    border: 0.1rem dashed ${({ theme }) => theme.color.primaryLight};
+    transform: translateY(0.1rem);
   }
 `;

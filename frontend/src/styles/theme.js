@@ -1,18 +1,19 @@
 const theme = {
   color: {
-    primary: "#414141",
-    primaryLight: "#525252",
-    primaryDark: "#313131",
-    white: "#F2F7F4",
-    black: "#000",
+    grey: "#525252",
+    greyDark: "#292929",
+    greyLight: "#C2C2C2",
+    white: "#ffffff",
+    black: "#141414",
+    orange: "#E28413",
+    blue: "#4F7CAC",
+    red: "#A11D1D",
   },
   fontSize: {
-    small: "1.2em",
-    medium: "2.4em",
-    large: "3.6em",
-  },
-  margin: {
-    header: "2rem",
+    small: "1.5em",
+    medium: "2em",
+    large: "3em",
+    exLarge: "4em",
   },
   screenSize: {
     mobileS: "320px",

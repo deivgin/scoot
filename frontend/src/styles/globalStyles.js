@@ -6,9 +6,8 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
   body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     font-size: 62.5%;
-    background-color: #F2F7F4;
     box-sizing: border-box;
   }
 

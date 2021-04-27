@@ -11,8 +11,8 @@ export default function Logo({ children }) {
 
 //Styles
 const LogoContainer = styled.div`
-  font-size: ${({ theme }) => theme.fontSize.medium};
+  font-size: ${({ theme }) => theme.fontSize.large};
   padding-top: 0.25rem;
   padding-bottom: 0.5rem;
-  color: ${({ theme }) => theme.color.primaryLight};
+  color: #fff;
 `;
