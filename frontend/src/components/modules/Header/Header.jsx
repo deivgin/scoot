@@ -1,31 +1,58 @@
 import { useRef, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Logo from "../../elements/Logo";
 import Cart from "../../elements/Cart";
 import Hamburg from "./Hamburg";
 import MenuNav from "./MenuNav";
-import useOutsideClick from "../../../hooks/useOutsideClick";
 import { BiUser } from "react-icons/bi";
+import { useTransition } from "react-spring";
+import { Link, useLocation } from "react-router-dom";
 import Button from "../../elements/Button";
+import useViewport from "../../../hooks/useViewport";
+import { size } from "../../../styles/devices";
 
 export default function Header() {
   const [navOpen, setNavOpen] = useState(false);
   const menuRef = useRef();
-  useOutsideClick(menuRef, () => {
-    if (navOpen) setNavOpen(false);
+  const location = useLocation();
+  const { width } = useViewport();
+  console.log(width);
+
+  const transitions = useTransition(navOpen, {
+    from: { x: width, opacity: 0 },
+    enter: { x: 0, opacity: 1 },
+    leave: { x: width, opacity: 0 },
   });
 
   return (
-    <StyledHeader>
+    <StyledHeader location={location.pathname}>
       <Logo>ScooT</Logo>
       <Navigation>
-        <Button inverted>shop</Button>
+        {location.pathname === "/" && width > size.mobileL && (
+          <Button>
+            <Link to="shop">shop</Link>
+          </Button>
+        )}
         <Cart />
         <ProfileButton>
           <BiUser />
         </ProfileButton>
-        <Hamburg open={navOpen} setOpen={setNavOpen} />
-        {navOpen && <MenuNav open={navOpen} menuRef={menuRef} />}
+        {transitions(
+          (style, item) =>
+            item && (
+              <MenuNav
+                style={style}
+                open={navOpen}
+                setOpen={setNavOpen}
+                menuRef={menuRef}
+              />
+            )
+        )}
+        <Hamburg
+          open={navOpen}
+          setOpen={setNavOpen}
+          location={location.pathname}
+        />
       </Navigation>
     </StyledHeader>
   );
@@ -34,8 +61,11 @@ export default function Header() {
 //Styles
 const StyledHeader = styled.header`
   position: relative;
-  background-color: ${({ theme }) => theme.color.black};
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+  background-color: ${({ location, theme }) =>
+    location === "/" ? theme.color.white : theme.color.black};
+  color: ${({ location, theme }) =>
+    location === "/" ? theme.color.black : theme.color.white};
+
   height: 5rem;
   display: flex;
   flex-direction: row;
@@ -49,7 +79,7 @@ const Navigation = styled.div`
   flex-direction: row;
 
   > * {
-    padding-left: 3rem;
+    margin-left: 3rem;
   }
 `;
 
@@ -57,6 +87,6 @@ const ProfileButton = styled.button`
   background: transparent;
   border: none;
   cursor: pointer;
-  color: ${({ theme }) => theme.color.white};
-  font-size: 1.25rem;
+  color: inherit;
+  font-size: 1.5rem;
 `;

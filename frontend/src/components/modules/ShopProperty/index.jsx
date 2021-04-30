@@ -61,7 +61,7 @@ export default function ShopProperty() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("submited");
+    alert("submit");
   };
   return (
     <>
@@ -94,7 +94,6 @@ const Form = styled.form`
   grid-template-rows:
     [options-start] 1fr [options-end price-start]
     0.25fr [price-end button-start] 0.25fr [button-end];
-  border-left: 0.1rem solid ${({ theme }) => theme.color.primary};
 `;
 
 const OrderButton = styled(Button)`

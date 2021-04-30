@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export default function Hamburg({ open, setOpen }) {
+export default function Hamburg({ open, setOpen, location }) {
   return (
     <StyledHamburg onClick={() => setOpen(!open)}>
-      <Line open={open}></Line>
-      <Line open={open}></Line>
+      <Line open={open} location={location}></Line>
+      <Line open={open} location={location}></Line>
     </StyledHamburg>
   );
 }
@@ -26,7 +26,9 @@ const Line = styled.div`
   transition: all 0.1s linear;
   position: relative;
   transform-origin: 0.5rem;
-  background-color: ${({ theme }) => theme.color.white};
+  background-color: ${({ location, theme }) =>
+    location === "/" ? theme.color.black : theme.color.white};
+  background-color: ${({ open, theme }) => open && theme.color.white};
   :first-child {
     transform: ${({ open }) => (open ? "rotate(45deg)" : "rotate(0)")};
   }

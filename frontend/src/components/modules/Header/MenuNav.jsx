@@ -1,19 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import { useSpring, animated } from "react-spring";
+import { animated } from "react-spring";
 
-export default function MenuNav({ open, menuRef }) {
-  const transform = useSpring({
-    from: { transform: "translateX(30rem)" },
-    to: { transform: "translateX(0)" },
-  });
-
-  const fadeIn = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: 1 },
-    delay: 1000,
-  });
+export default function MenuNav({ open, setOpen, menuRef, style }) {
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
@@ -22,44 +12,34 @@ export default function MenuNav({ open, menuRef }) {
 
   return (
     <>
-      <Nav style={transform} open={open} ref={menuRef}>
+      <Nav style={style} open={open} ref={menuRef}>
         <ul>
           <li>
-            <Link to="/shop">Shop</Link>
+            <Link to="/" onClick={() => setOpen(false)}>
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/signin">Sign up</Link>
+            <Link to="/shop" onClick={() => setOpen(false)}>
+              Shop
+            </Link>
           </li>
         </ul>
       </Nav>
-      <NavBackground styles={fadeIn} />
     </>
   );
 }
 
 //Styles
-const NavBackground = styled(animated.div)`
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: #000;
-  opacity: 0.5;
-  filter: alpha(opacity = 50);
-`;
 
 const Nav = styled(animated.nav)`
   position: absolute;
-  z-index: 10;
+  z-index: 20;
   background-color: ${({ theme }) => theme.color.black};
   color: ${({ theme }) => theme.color.white};
   top: 0;
   right: 0;
-  width: 30rem;
+  width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -67,13 +47,12 @@ const Nav = styled(animated.nav)`
   align-items: center;
   text-align: center;
   font-size: ${({ theme }) => theme.fontSize.exLarge};
-  border: 0.1rem solid ${({ theme }) => theme.color.black};
 
   a {
-    color: ${({ theme }) => theme.color.primary};
-    border-bottom: 0.2rem dashed transparent;
+    color: ${({ theme }) => theme.color.white};
+    border-bottom: 0.2rem solid transparent;
     :hover {
-      border-bottom: 0.2rem dashed ${({ theme }) => theme.color.primary};
+      border-bottom: 0.2rem solid ${({ theme }) => theme.color.white};
     }
   }
 

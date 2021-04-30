@@ -1,12 +1,12 @@
 import styled from "styled-components";
+import { animated } from "react-spring";
 
 export default function Home() {
   return <Container>Home Page</Container>;
 }
 
 const Container = styled.div`
-  width: 100%;
-  height: 89vh; //i think this eint good
-  overflow: hidden;
-  position: relative;
+  height: 95vh;
 `;
+
+const Header = styled(animated.h1)``;

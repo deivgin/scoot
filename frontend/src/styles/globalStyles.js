@@ -5,9 +5,13 @@ const GlobalStyle = createGlobalStyle`
     margin:0;
     padding: 0;
   }
+
+  html{
+    font-size: 62.5%;
+  }
+
   body {
     font-family: 'Quicksand', sans-serif;
-    font-size: 62.5%;
     box-sizing: border-box;
   }
 

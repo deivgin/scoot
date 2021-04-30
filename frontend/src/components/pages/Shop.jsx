@@ -5,6 +5,7 @@ import ShopProperty from "../modules/ShopProperty";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Loader from "react-loader-spinner";
+import { device } from "../../styles/devices";
 
 export default function Shop() {
   const [loading, setLoading] = useState(true);
@@ -29,14 +30,15 @@ export default function Shop() {
 }
 
 //Styles
-const Container = styled.div`
+const Container = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 100%;
+  height: 80vh;
+  margin-top: 3rem;
 
-  @media only screen and (max-width: ${({ theme }) =>
-      theme.screenSize.laptop}) {
+  @media ${device.laptop} {
     grid-template-columns: 1fr;
+    grid-template-rows: 70vh 80vh;
   }
 `;
 

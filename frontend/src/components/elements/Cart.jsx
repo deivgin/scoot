@@ -17,7 +17,7 @@ const StyledCart = styled.button`
   display: flex;
   align-items: center;
   cursor: pointer;
-  color: ${({ theme }) => theme.color.white};
+  color: inherit;
 `;
 
 const Icon = styled(FiShoppingCart)`

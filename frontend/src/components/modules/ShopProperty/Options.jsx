@@ -81,7 +81,7 @@ const Tabs = styled.div`
 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 4.5rem 4rem repeat(4, 1fr);
+  grid-template-rows: 4fr 3.5fr repeat(4, 1fr);
   row-gap: 0.5rem;
 `;
 

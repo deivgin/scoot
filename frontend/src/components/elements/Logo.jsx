@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { device } from "../../styles/devices";
 
 export default function Logo({ children }) {
   return (
@@ -14,5 +15,9 @@ const LogoContainer = styled.div`
   font-size: ${({ theme }) => theme.fontSize.large};
   padding-top: 0.25rem;
   padding-bottom: 0.5rem;
-  color: #fff;
+  color: inherit;
+
+  @media ${device.mobileL} {
+    ${({ theme }) => theme.fontSize.small};
+  }
 `;
