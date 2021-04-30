@@ -16,6 +16,7 @@ const StyledHamburg = styled.button`
   :hover {
     cursor: pointer;
   }
+  z-index: 999;
 `;
 
 const Line = styled.div`

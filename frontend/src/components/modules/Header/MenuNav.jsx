@@ -1,20 +1,28 @@
-import styled, { cs } from "styled-components";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useSpring, animated } from "react-spring";
 
 export default function MenuNav({ open, menuRef }) {
-  const [navX, setNavX] = useState(30);
+  const transform = useSpring({
+    from: { transform: "translateX(30rem)" },
+    to: { transform: "translateX(0)" },
+  });
 
+  const fadeIn = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+    delay: 1000,
+  });
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
-    setNavX(0);
     return () => (document.body.style.overflow = "unset");
   }, []);
 
   return (
     <>
-      <Nav open={open} ref={menuRef} navX={navX}>
+      <Nav style={transform} open={open} ref={menuRef}>
         <ul>
           <li>
             <Link to="/shop">Shop</Link>
@@ -27,14 +35,14 @@ export default function MenuNav({ open, menuRef }) {
           </li>
         </ul>
       </Nav>
-      <NavBackground />
+      <NavBackground styles={fadeIn} />
     </>
   );
 }
 
 //Styles
-const NavBackground = styled.div`
-  width: 80vw;
+const NavBackground = styled(animated.div)`
+  width: 100vw;
   height: 100vh;
   position: absolute;
   top: 0;
@@ -44,7 +52,7 @@ const NavBackground = styled.div`
   filter: alpha(opacity = 50);
 `;
 
-const Nav = styled.nav`
+const Nav = styled(animated.nav)`
   position: absolute;
   z-index: 10;
   background-color: ${({ theme }) => theme.color.black};
@@ -55,11 +63,12 @@ const Nav = styled.nav`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  font-size: ${({ theme }) => theme.fontSize.medium};
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: ${({ theme }) => theme.fontSize.exLarge};
   border: 0.1rem solid ${({ theme }) => theme.color.black};
-  transition: 1s ease;
-  transform: ${({ open, navX }) =>
-    open ? `transform(${navX}rem)` : `teansform(${navX}rem)`};
+
   a {
     color: ${({ theme }) => theme.color.primary};
     border-bottom: 0.2rem dashed transparent;
