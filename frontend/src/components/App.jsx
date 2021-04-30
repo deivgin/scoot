@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Header from "./modules/Header/Header";
@@ -9,7 +8,7 @@ export default function App() {
   return (
     <Router>
       <Header />
-      <MainContent>
+      <main>
         <Switch>
           <Route exact path="/">
             <Home />
@@ -18,10 +17,8 @@ export default function App() {
             <Shop />
           </Route>
         </Switch>
-      </MainContent>
+      </main>
       <Footer />
     </Router>
   );
 }
-
-const MainContent = styled.main``;

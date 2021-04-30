@@ -48,6 +48,7 @@ export default function Options({ tabData, handleTabs }) {
       {tabData.tabs.map((item, index) => (
         <Button
           key={index}
+          inverted
           type="button"
           onClick={() => handleTabs(item)}
           active={item.name === tabData.currTab.name}

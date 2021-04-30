@@ -21,11 +21,7 @@ const StyledButton = styled.button`
       : ({ theme }) => theme.color.white};
   font-size: ${({ theme }) => theme.fontSize.small};
   padding: 0.5rem 2rem;
-  border: 3px solid
-    ${({ inverted }) =>
-      inverted
-        ? ({ theme }) => theme.color.white
-        : ({ theme }) => theme.color.black};
+  border: 3px solid ${({ theme }) => theme.color.black};
   border-radius: 10px;
   box-shadow: 0 0.4rem 0.4rem rgb(0, 0, 0, 0.5);
   transition: 0.2s;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export default function Footer() {
   return (
     <StyledFooter>
-      <h1>Footer</h1>
+      <p>© 2021 Deividas Gineitis. All Rights Reserved</p>
     </StyledFooter>
   );
 }
@@ -12,6 +12,8 @@ export default function Footer() {
 const StyledFooter = styled.footer`
   width: 100%;
   background-color: ${({ theme }) => theme.color.greyDark};
-  color: ${({ theme }) => theme.color.white};
+  color: ${({ theme }) => theme.color.grey};
   text-align: center;
+  margin: 0;
+  font-size: ${({ theme }) => theme.fontSize.small};
 `;
