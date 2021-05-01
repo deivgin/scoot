@@ -95,10 +95,10 @@ const Form = styled.form`
     1fr [content-right-end pad-right-start]
     3rem [pad-right-end];
   grid-template-rows:
-    [options-start] 1fr [options-end order-start]
-    6rem [order-end padding-start] 5rem [padding-end];
+    [options-start] minmax(10rem, 1fr) [options-end order-start]
+    8rem [order-end padding-start] 5rem [padding-end];
 
-  @media ${device.mobileL} {
+  @media ${device.laptop} {
     grid-template-columns:
       [content-left-start]
       1fr [content-left-end content-right-start]
@@ -109,11 +109,11 @@ const Form = styled.form`
 const OrderButton = styled(Button)`
   grid-column: content-right-start / content-right-end;
   grid-row: order-start / order-end;
-  font-size: ${({ theme }) => theme.fontSize.large};
   margin: 0.5rem;
   justify-self: center;
-  font-size: ${({ theme }) => theme.fontSize.medium};
-  padding: 0 4rem;
+  font-size: ${({ theme }) => theme.fontSize.large};
+  padding: 0.5rem 4rem;
+  align-self: end;
 `;
 
 const Price = styled.span`
@@ -121,7 +121,7 @@ const Price = styled.span`
   grid-row: order-start / order-end;
   justify-self: center;
   align-self: end;
-  font-size: ${({ theme }) => theme.fontSize.large};
+  font-size: ${({ theme }) => theme.fontSize.exLarge};
   color: ${({ theme }) => theme.color.primary};
   margin-bottom: 0.5rem;
 `;

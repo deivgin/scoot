@@ -84,7 +84,7 @@ const Tabs = styled.div`
 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 8rem 6rem repeat(4, 1fr);
+  grid-template-rows: 8rem 6rem 1fr;
   column-gap: 2rem;
   row-gap: 0.5rem;
 
@@ -117,10 +117,12 @@ const OptionName = styled.h2`
 
 const OptionContainer = styled.div`
   grid-column: 1 / -1;
-  width: 100%;
+  overflow-y: scroll;
 
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  column-gap: 1.5rem;
+  row-gap: 3rem;
 
   @media ${device.mobileL} {
     grid-template-columns: 1fr;
