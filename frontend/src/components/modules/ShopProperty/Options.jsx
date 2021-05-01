@@ -41,7 +41,6 @@ export default function Options({ tabData, handleTabs }) {
     );
     dispatch(changeValue(foundValue));
     dispatch(calcTotal());
-    console.log(product);
   };
 
   return (

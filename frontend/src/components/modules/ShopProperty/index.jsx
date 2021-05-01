@@ -127,7 +127,7 @@ const Price = styled.span`
 `;
 
 const StyledLoader = styled(Loader)`
-  grid-column: content-start / content-end;
+  grid-column: content-left-start / content-right-end;
   grid-row: options-start / option-end;
   align-self: center;
   justify-self: center;

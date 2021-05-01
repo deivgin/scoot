@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Logo from "../../elements/Logo";
 import Cart from "../../elements/Cart";
 import Hamburg from "./Hamburg";
