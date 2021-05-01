@@ -15,16 +15,8 @@ export default function Option({ name, checked, price, ...props }) {
 
 //Styles
 const Container = styled.div`
-  grid-column: 1 / -1;
-  align-self: center;
-  border: 0.1rem ${(props) => (props.active ? "dashed" : "solid")}${({ theme }) => theme.color.primaryLight};
   height: 100%;
   position: relative;
-
-  :hover {
-    border: 0.1rem dashed ${({ theme }) => theme.color.primaryLight};
-    cursor: pointer;
-  }
 `;
 
 const StyledInput = styled.input`

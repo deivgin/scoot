@@ -8,6 +8,7 @@ import { GiCarWheel } from "react-icons/gi";
 import { MdTexture } from "react-icons/md";
 import { AiOutlineControl, AiOutlineFileImage } from "react-icons/ai";
 import { IoSpeedometerOutline } from "react-icons/io5";
+import { device } from "../../../styles/devices";
 
 export default function Options({ tabData, handleTabs }) {
   const product = useSelector((state) => state.product);
@@ -46,7 +47,7 @@ export default function Options({ tabData, handleTabs }) {
   return (
     <Tabs>
       {tabData.tabs.map((item, index) => (
-        <Button
+        <TabsButton
           key={index}
           inverted
           type="button"
@@ -54,44 +55,76 @@ export default function Options({ tabData, handleTabs }) {
           active={item.name === tabData.currTab.name}
         >
           {generateButton(item.name)}
-        </Button>
+        </TabsButton>
       ))}
       <OptionName>{tabData.currTab.name}</OptionName>
-      {tabData.currTab.data.map((item) => {
-        return (
-          <Option
-            key={item.id}
-            name={item.name}
-            price={item.price}
-            value={JSON.stringify(item)}
-            checked={item.name === currTabProduct.data.name}
-            onChange={handleInputChange}
-          />
-        );
-      })}
+      <OptionContainer>
+        {tabData.currTab.data.map((item) => {
+          return (
+            <Option
+              key={item.id}
+              name={item.name}
+              price={item.price}
+              value={JSON.stringify(item)}
+              checked={item.name === currTabProduct.data.name}
+              onChange={handleInputChange}
+            />
+          );
+        })}
+      </OptionContainer>
     </Tabs>
   );
 }
 
 //Styles
 const Tabs = styled.div`
-  //border: 0.1rem solid ${({ theme }) => theme.color.primaryLight};
-  grid-column: content-start / content-end;
+  grid-column: content-left-start / content-right-end;
   grid-row: options-start / options-end;
   margin: 0.5rem;
 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 4fr 3.5fr repeat(4, 1fr);
+  grid-template-rows: 8rem 6rem repeat(4, 1fr);
+  column-gap: 2rem;
   row-gap: 0.5rem;
+
+  @media ${device.mobileL} {
+    column-gap: 0.5rem;
+  }
+`;
+
+const TabsButton = styled(Button)`
+  font-size: ${({ theme }) => theme.fontSize.exLarge};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: ${({ active, theme }) => active && theme.color.white};
+  background-color: ${({ active, theme }) => active && theme.color.black};
+
+  @media ${device.mobileL} {
+    padding: 0.2rem;
+  }
 `;
 
 const OptionName = styled.h2`
   grid-column: 1 / -1;
   grid-row: 2 / 3;
   align-self: center;
-  font-size: 1.4rem;
-  color: ${({ theme }) => theme.color.primaryDark};
+  font-size: ${({ theme }) => theme.fontSize.large};
+  color: ${({ theme }) => theme.color.black};
+`;
+
+const OptionContainer = styled.div`
+  grid-column: 1 / -1;
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  @media ${device.mobileL} {
+    grid-template-columns: 1fr;
+  }
 `;
 
 //PropTypes

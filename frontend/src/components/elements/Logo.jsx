@@ -16,6 +16,7 @@ const LogoContainer = styled.div`
   padding-top: 0.25rem;
   padding-bottom: 0.5rem;
   color: inherit;
+  font-weight: medium;
 
   @media ${device.mobileL} {
     ${({ theme }) => theme.fontSize.small};

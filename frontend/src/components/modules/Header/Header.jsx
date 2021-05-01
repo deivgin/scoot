@@ -16,7 +16,6 @@ export default function Header() {
   const menuRef = useRef();
   const location = useLocation();
   const { width } = useViewport();
-  console.log(width);
 
   const transitions = useTransition(navOpen, {
     from: { x: width, opacity: 0 },

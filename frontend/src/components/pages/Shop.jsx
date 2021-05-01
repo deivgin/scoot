@@ -33,10 +33,10 @@ export default function Shop() {
 const Container = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 80vh;
+  grid-template-rows: 90vh;
   margin-top: 3rem;
 
-  @media ${device.laptop} {
+  @media ${device.tablet} {
     grid-template-columns: 1fr;
     grid-template-rows: 70vh 80vh;
   }

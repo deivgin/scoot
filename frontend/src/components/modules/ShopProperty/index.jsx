@@ -5,6 +5,7 @@ import { changeValue, calcTotal } from "../../../redux/Product/product.actions";
 import Options from "./Options";
 import Button from "../../elements/Button";
 import Loader from "react-loader-spinner";
+import { device } from "../../../styles/devices";
 
 export default function ShopProperty() {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,12 +26,12 @@ export default function ShopProperty() {
         const materialResponse = await fetch(`${url}/materials`);
         const materialData = await materialResponse.json();
         setData({
-          currTab: { name: "wheels", data: wheelsData },
+          currTab: { name: "material", data: materialData },
           tabs: [
+            { name: "material", data: materialData },
             { name: "wheels", data: wheelsData },
             { name: "speed", data: speedData },
             { name: "controls", data: controlsData },
-            { name: "material", data: materialData },
           ],
         });
         setIsLoading(false);
@@ -89,23 +90,35 @@ export default function ShopProperty() {
 const Form = styled.form`
   display: grid;
   grid-template-columns:
-    [pad-left-start] 3rem [pad-left-end content-start]
-    auto [content-end pad-right-start] 3rem [pad-right-end];
+    [pad-left-start] 3rem [pad-left-end content-left-start]
+    1fr [content-left-end content-right-start]
+    1fr [content-right-end pad-right-start]
+    3rem [pad-right-end];
   grid-template-rows:
-    [options-start] 1fr [options-end price-start]
-    0.25fr [price-end button-start] 0.25fr [button-end];
+    [options-start] 1fr [options-end order-start]
+    6rem [order-end padding-start] 5rem [padding-end];
+
+  @media ${device.mobileL} {
+    grid-template-columns:
+      [content-left-start]
+      1fr [content-left-end content-right-start]
+      1fr [content-right-end];
+  }
 `;
 
 const OrderButton = styled(Button)`
-  grid-column: content-start / content-end;
-  grid-row: button-start / button-end;
+  grid-column: content-right-start / content-right-end;
+  grid-row: order-start / order-end;
   font-size: ${({ theme }) => theme.fontSize.large};
   margin: 0.5rem;
+  justify-self: center;
+  font-size: ${({ theme }) => theme.fontSize.medium};
+  padding: 0 4rem;
 `;
 
 const Price = styled.span`
-  grid-column: content-start / content-end;
-  grid-row: price-start / price-end;
+  grid-column: content-left-start / content-left-end;
+  grid-row: order-start / order-end;
   justify-self: center;
   align-self: end;
   font-size: ${({ theme }) => theme.fontSize.large};
