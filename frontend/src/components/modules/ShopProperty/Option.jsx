@@ -8,7 +8,7 @@ export default function Option({ name, checked, price, ...props }) {
       <StyledLabel htmlFor="option">{name}</StyledLabel>
       <StyledImage active={checked} />
       <StyledPrice>
-        <span>{price}</span>
+        <span>{price}€</span>
       </StyledPrice>
     </Container>
   );
