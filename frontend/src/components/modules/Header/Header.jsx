@@ -34,7 +34,7 @@ export default function Header() {
         )}
         <Cart />
         <ProfileButton>
-          <Link to="/sign-in">
+          <Link to="/profile">
             <BiUser />
           </Link>
         </ProfileButton>

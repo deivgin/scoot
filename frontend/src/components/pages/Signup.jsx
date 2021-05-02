@@ -4,8 +4,11 @@ import Button from "../elements/Button";
 import { useState, useEffect } from "react";
 import { device } from "../../styles/devices";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import Loader from "react-loader-spinner";
+import PropTypes from "prop-types";
 
-export default function SigninForm() {
+export default function SigninForm({ updateUser }) {
   const [email, setEmail] = useState("");
   const [showEmailLabel, setShowEmailLabel] = useState(false);
   const [password, setPassword] = useState("");
@@ -14,6 +17,7 @@ export default function SigninForm() {
   const [showConfirmPasswordLabel, setShowConfirmPasswordLabel] = useState(
     false
   );
+  const [loading, setLoading] = useState();
   useEffect(() => {
     email.length > 0 ? setShowEmailLabel(true) : setShowEmailLabel(false);
     password.length > 0
@@ -26,14 +30,33 @@ export default function SigninForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("submited");
+    setLoading(true);
+    axios
+      .post("http://localhost:1337/auth/local/register", {
+        username: email,
+        email: email,
+        password: password,
+      })
+      .then((response) => {
+        // Handle success.
+        alert("Registered");
+        console.log("User profile", response.data.user);
+        console.log("User token", response.data.jwt);
+        updateUser(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        // Handle error.
+        console.log("An error occurred:", error.response);
+        setLoading(false);
+      });
   };
   return (
     <Container>
       <StyledForm onSubmit={handleSubmit}>
         <Header>Sign up</Header>
         <Input
-          // type="email"
+          type="email"
           label="email"
           name="email"
           placeholder="email"
@@ -63,7 +86,11 @@ export default function SigninForm() {
           shown={showConfirmPasswordLabel}
         />
         <SubmitButton inverted type="submit">
-          Sign up
+          {loading ? (
+            <Loader type="ThreeDots" color="#414141" height={20} width={20} />
+          ) : (
+            "Sign up"
+          )}
         </SubmitButton>
         <StyledSwitchContainer>
           <Header>have an account?</Header>
@@ -96,3 +123,8 @@ const StyledForm = styled.form`
 const Header = styled.h1``;
 
 const SubmitButton = styled(Button)``;
+
+//PropTypes
+SigninForm.propTypes = {
+  updateUser: PropTypes.func.isRequired,
+};

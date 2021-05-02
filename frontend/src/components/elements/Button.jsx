@@ -43,4 +43,11 @@ const StyledButton = styled.button`
   :active {
     transform: translateY(0.1rem);
   }
+
+  :disabled,
+  [disabled] {
+    background-color: ${({ theme }) => theme.color.greyDark};
+    color: ${({ theme }) => theme.color.greyLight};
+    border: 3px solid ${({ theme }) => theme.color.grey};
+  }
 `;

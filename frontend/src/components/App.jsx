@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Home, Shop, Signin, Signup } from "./pages";
+import { Home, Shop, Signin, Signup, Profile } from "./pages";
 import Header from "./modules/Header/Header";
 import Footer from "./modules/Footer";
+import { useState } from "react";
+import ProtectedRoute from "./elements/ProtectedRoute";
 
 export default function App() {
+  const [user, setUser] = useState(null);
+  console.log("user", user);
   return (
     <Router>
       <Header />
@@ -17,11 +21,18 @@ export default function App() {
             <Shop />
           </Route>
           <Route path="/sign-in">
-            <Signin />
+            <Signin updateUser={(user) => setUser(user)} />
           </Route>
           <Route path="/sign-up">
-            <Signup />
+            <Signup updateUser={(user) => setUser(user)} />
           </Route>
+          <ProtectedRoute
+            path="/profile"
+            user={user}
+            redirectRoute={"/sign-in"}
+          >
+            <Profile user={user} />
+          </ProtectedRoute>
         </Switch>
       </Main>
       <Footer />
