@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useSpring, animated, to } from "react-spring";
+import { useSpring, animated } from "react-spring";
 
 export default function Home() {
   const fadeInSide = useSpring({
@@ -14,17 +14,17 @@ export default function Home() {
     delay: 1000,
   });
   return (
-    <Container>
+    <Section>
       <Header style={fadeInSide}>
         ScooT
         <span>MK1</span>
       </Header>
       <P style={fadeInTop}>Fastest scooter ever</P>
-    </Container>
+    </Section>
   );
 }
 
-const Container = styled.div`
+const Section = styled.section`
   height: 95vh;
   display: flex;
   flex-direction: column;

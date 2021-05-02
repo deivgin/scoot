@@ -24,6 +24,11 @@ export default function MenuNav({ open, setOpen, menuRef, style }) {
               Shop
             </Link>
           </li>
+          <li>
+            <Link to="/sign-in" onClick={() => setOpen(false)}>
+              Sign in
+            </Link>
+          </li>
         </ul>
       </Nav>
     </>

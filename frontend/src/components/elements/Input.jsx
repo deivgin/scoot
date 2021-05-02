@@ -1,17 +1,12 @@
-import { useState, useEffect } from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
-export default function Input({ label, name, value, ...props }) {
-  const [labelShown, setLabelShown] = useState(false);
-  useEffect(
-    () => (value.length > 0 ? setLabelShown(true) : setLabelShown(false)),
-    [value]
-  );
+export default function Input({ label, name, shown, ...props }) {
   return (
     <Container>
       <StyledInput {...props} />
       {label && (
-        <StyledLabel shown={labelShown} htmlFor={name}>
+        <StyledLabel shown={shown} htmlFor={name}>
           {label}
         </StyledLabel>
       )}
@@ -29,18 +24,25 @@ const StyledLabel = styled.label`
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
   transition: ease-in-out 0.2s;
-  transform: ${(props) => (!props.shown ? "translateY(2rem)" : null)};
+  transform: ${({ shown }) => (!shown ? "translateY(2rem)" : null)};
   z-index: -1;
 `;
 
 const StyledInput = styled.input`
   font-size: ${({ theme }) => theme.fontSize.medium};
-  border: 0.1rem solid ${({ theme }) => theme.color.primary};
+  border: 3px solid ${({ theme }) => theme.color.black};
+  border-radius: 10px;
   padding: 0.5rem;
-  margin-bottom: 0.5rem;
+  padding-left: 1rem;
 
   :focus {
     outline: none;
-    border: 0.1rem dashed ${({ theme }) => theme.color.primaryLight};
+    border: 3px solid ${({ theme }) => theme.color.grey};
   }
 `;
+
+Input.propTypes = {
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  shown: PropTypes.bool.isRequired,
+};

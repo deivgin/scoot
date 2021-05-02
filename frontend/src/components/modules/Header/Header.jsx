@@ -34,7 +34,9 @@ export default function Header() {
         )}
         <Cart />
         <ProfileButton>
-          <BiUser />
+          <Link to="/sign-in">
+            <BiUser />
+          </Link>
         </ProfileButton>
         {transitions(
           (style, item) =>
