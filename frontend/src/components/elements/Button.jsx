@@ -50,4 +50,8 @@ const StyledButton = styled.button`
     color: ${({ theme }) => theme.color.greyLight};
     border: 3px solid ${({ theme }) => theme.color.grey};
   }
+
+  a {
+    display: block;
+  }
 `;

@@ -85,20 +85,20 @@ export default function SigninForm({ updateUser }) {
           }}
           shown={showConfirmPasswordLabel}
         />
-        <SubmitButton inverted type="submit">
+        <StyledButton type="submit">
           {loading ? (
             <Loader type="ThreeDots" color="#414141" height={20} width={20} />
           ) : (
             "Sign up"
           )}
-        </SubmitButton>
-        <StyledSwitchContainer>
-          <Header>have an account?</Header>
-          <Button type="button">
-            <Link to="/sign-in">sign in</Link>
-          </Button>
-        </StyledSwitchContainer>
+        </StyledButton>
       </StyledForm>
+      <StyledSwitchContainer>
+        <Header inverted>have an account?</Header>
+        <StyledButton inverted type="button">
+          <Link to="/sign-in">sign in</Link>
+        </StyledButton>
+      </StyledSwitchContainer>
     </Container>
   );
 }
@@ -107,22 +107,43 @@ export default function SigninForm({ updateUser }) {
 const Container = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
-
-  @media ${device.tablet} {
+  justify-self: center;
+  align-self: center;
+  margin-top: 3rem;
+  @media ${device.mobileL} {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
   }
 `;
 
-const StyledSwitchContainer = styled.div``;
-
-const StyledForm = styled.form`
-  padding: 8rem;
+const StyledSwitchContainer = styled.div`
+  background-color: ${({ theme }) => theme.color.black};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  border-radius: 0 10px 10px 0;
 `;
 
-const Header = styled.h1``;
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  padding-right: 2rem;
+`;
 
-const SubmitButton = styled(Button)``;
+const Header = styled.h1`
+  font-size: ${({ theme }) => theme.fontSize.exLarge};
+  color: ${({ theme, inverted }) =>
+    inverted ? theme.color.white : theme.color.black};
+  padding: 2rem;
+`;
+
+const StyledButton = styled(Button)`
+  margin: 0 3rem;
+  margin-top: 3rem;
+`;
 
 //PropTypes
 SigninForm.propTypes = {
