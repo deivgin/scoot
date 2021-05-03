@@ -3,7 +3,7 @@ import Input from "../elements/Input";
 import Button from "../elements/Button";
 import { useState, useEffect } from "react";
 import { device } from "../../styles/devices";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import PropTypes from "prop-types";
 import Loader from "react-loader-spinner";
@@ -13,6 +13,7 @@ export default function SigninForm({ updateUser }) {
   const [showEmailLabel, setShowEmailLabel] = useState(false);
   const [password, setPassword] = useState("");
   const [showPasswordLabel, setShowPasswordLabel] = useState(false);
+  const [redirect, setRedirect] = useState(false);
   useEffect(() => {
     email.length > 0 ? setShowEmailLabel(true) : setShowEmailLabel(false);
     password.length > 0
@@ -33,7 +34,7 @@ export default function SigninForm({ updateUser }) {
         // Handle success.
         updateUser(response.data);
         setLoading(false);
-        alert("loged-in");
+        setRedirect(true);
       })
       .catch((error) => {
         // Handle error.
@@ -41,46 +42,49 @@ export default function SigninForm({ updateUser }) {
         setLoading(false);
       });
   };
-  return (
-    <Container>
-      <StyledForm onSubmit={handleSubmit}>
-        <Header>Sign in</Header>
-        <Input
-          // type="email"
-          label="email"
-          name="email"
-          placeholder="email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          shown={showEmailLabel}
-        />
-        <Input
-          type="password"
-          label="password"
-          name="password"
-          placeholder="password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          shown={showPasswordLabel}
-        />
-        <StyledButton type="submit" disabled={loading}>
-          {loading ? (
-            <Loader type="ThreeDots" color="#414141" height={20} width={20} />
-          ) : (
-            "Sign in"
-          )}
-        </StyledButton>
-      </StyledForm>
-      <StyledSwitchContainer>
-        <Header inverted>New to Scoot?</Header>
-        <StyledButton inverted type="button">
-          <Link to="/sign-up">sign up</Link>
-        </StyledButton>
-      </StyledSwitchContainer>
-    </Container>
-  );
+  if (redirect) {
+    return <Redirect to="/" />;
+  } else
+    return (
+      <Container>
+        <StyledForm onSubmit={handleSubmit}>
+          <Header>Sign in</Header>
+          <Input
+            // type="email"
+            label="email"
+            name="email"
+            placeholder="email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            shown={showEmailLabel}
+          />
+          <Input
+            type="password"
+            label="password"
+            name="password"
+            placeholder="password"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            shown={showPasswordLabel}
+          />
+          <StyledButton type="submit" disabled={loading}>
+            {loading ? (
+              <Loader type="ThreeDots" color="#414141" height={20} width={20} />
+            ) : (
+              "Sign in"
+            )}
+          </StyledButton>
+        </StyledForm>
+        <StyledSwitchContainer>
+          <Header inverted>New to Scoot?</Header>
+          <StyledButton inverted type="button">
+            <Link to="/sign-up">sign up</Link>
+          </StyledButton>
+        </StyledSwitchContainer>
+      </Container>
+    );
 }
 
 //Styles
