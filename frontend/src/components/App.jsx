@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Home, Shop, Signin, Signup, Profile } from "./pages";
+import { Home, Shop, Signin, SignUp, Profile } from "./pages";
 import Header from "./modules/Header/Header";
 import Footer from "./modules/Footer";
 import { useState } from "react";
@@ -24,7 +24,7 @@ export default function App() {
             <Signin updateUser={(user) => setUser(user)} />
           </Route>
           <Route path="/sign-up">
-            <Signup updateUser={(user) => setUser(user)} />
+            <SignUp updateUser={(user) => setUser(user)} />
           </Route>
           <ProtectedRoute
             path="/profile"

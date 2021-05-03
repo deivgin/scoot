@@ -1,112 +1,67 @@
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import Input from "../elements/Input";
-import Button from "../elements/Button";
-import { useState, useEffect } from "react";
 import { device } from "../../styles/devices";
-import { Link, Redirect } from "react-router-dom";
-import axios from "axios";
-import Loader from "react-loader-spinner";
-import PropTypes from "prop-types";
+import Button from "../elements/Button";
 
-export default function SigninForm({ updateUser }) {
-  const [email, setEmail] = useState("");
-  const [showEmailLabel, setShowEmailLabel] = useState(false);
-  const [password, setPassword] = useState("");
-  const [showPasswordLabel, setShowPasswordLabel] = useState(false);
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [showConfirmPasswordLabel, setShowConfirmPasswordLabel] = useState(
-    false
-  );
-  const [redirect, setRedirect] = useState(false);
-  const [loading, setLoading] = useState();
-  useEffect(() => {
-    email.length > 0 ? setShowEmailLabel(true) : setShowEmailLabel(false);
-    password.length > 0
-      ? setShowPasswordLabel(true)
-      : setShowPasswordLabel(false);
-    confirmPassword.length > 0
-      ? setShowConfirmPasswordLabel(true)
-      : setShowConfirmPasswordLabel(false);
-  }, [email, password, confirmPassword]);
+export default function SignUp() {
+  const { register, handleSubmit } = useForm();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
-    axios
-      .post("http://localhost:1337/auth/local/register", {
-        username: email,
-        email: email,
-        password: password,
-      })
-      .then((response) => {
-        // Handle success.
-        updateUser(response.data);
-        setLoading(false);
-        setRedirect(true);
-      })
-      .catch((error) => {
-        // Handle error.
-        console.log("An error occurred:", error.response);
-        setLoading(false);
-      });
+  const onSubmit = (data) => {
+    console.log(data);
   };
-  if (redirect) {
-    return <Redirect to="/" />;
-  } else
-    return (
-      <Container>
-        <StyledForm onSubmit={handleSubmit}>
-          <Header>Sign up</Header>
-          <Input
-            type="email"
-            label="email"
-            name="email"
-            placeholder="email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-            shown={showEmailLabel}
-          />
-          <Input
-            type="password"
-            label="password"
-            name="password"
-            placeholder="password"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            shown={showPasswordLabel}
-          />
-          <Input
-            type="password"
-            label="confirm password"
-            name="confirmPassword"
-            placeholder="confirm password"
-            onChange={(e) => {
-              setConfirmPassword(e.target.value);
-            }}
-            shown={showConfirmPasswordLabel}
-          />
-          <StyledButton type="submit">
-            {loading ? (
-              <Loader type="ThreeDots" color="#414141" height={20} width={20} />
-            ) : (
-              "Sign up"
-            )}
-          </StyledButton>
-        </StyledForm>
-        <StyledSwitchContainer>
-          <Header inverted>have an account?</Header>
-          <StyledButton inverted type="button">
-            <Link to="/sign-in">sign in</Link>
-          </StyledButton>
-        </StyledSwitchContainer>
-      </Container>
-    );
+
+  return (
+    <Styles>
+      <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+        <h1>Sign Up</h1>
+        <div>
+          <input name="firstName" type="text" />
+          <label htmlFor="firstName">First Name</label>
+        </div>
+
+        <div>
+          <input name="lastName" type="text" />
+          <label htmlFor="lastName">Last Name</label>
+        </div>
+
+        <div>
+          <input name="country" />
+          <label htmlFor="country">Country</label>
+        </div>
+
+        <div>
+          <input name="address" type="text" />
+          <label htmlFor="address">Address</label>
+        </div>
+
+        <div>
+          <input name="city" type="text" />
+          <label htmlFor="city">City</label>
+        </div>
+
+        <div>
+          <input name="region" type="text" />
+          <label htmlFor="region">State/Province/Region</label>
+        </div>
+
+        <div>
+          <input name="phoneNumber" type="number" />
+          <label htmlFor="phoneNumber">Phone number</label>
+        </div>
+
+        <div>
+          <input name="zipCode" type="number" />
+          <label htmlFor="zipCode">Zip Code</label>
+        </div>
+
+        <Button type="submit">Sign Up</Button>
+      </form>
+    </Styles>
+  );
 }
 
 //Styles
-const Container = styled.section`
+const Styles = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-self: center;
@@ -116,37 +71,37 @@ const Container = styled.section`
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
   }
-`;
 
-const StyledSwitchContainer = styled.div`
-  background-color: ${({ theme }) => theme.color.black};
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-bottom: 3rem;
-  border-radius: 0 10px 10px 0;
-`;
+  div {
+    display: flex;
+    flex-direction: column-reverse;
+  }
 
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-bottom: 3rem;
-  padding-right: 2rem;
-`;
+  h1 {
+    font-size: ${({ theme }) => theme.fontSize.exLarge};
+    color: ${({ theme, inverted }) =>
+      inverted ? theme.color.white : theme.color.black};
+    padding: 2rem;
+  }
 
-const Header = styled.h1`
-  font-size: ${({ theme }) => theme.fontSize.exLarge};
-  color: ${({ theme, inverted }) =>
-    inverted ? theme.color.white : theme.color.black};
-  padding: 2rem;
-`;
+  label {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    transition: ease-in-out 0.2s;
+    //transform: ${({ shown }) => (!shown ? "translateY(2rem)" : null)};
+    z-index: -1;
+  }
 
-const StyledButton = styled(Button)`
-  margin: 3rem;
-`;
+  input {
+    font-size: ${({ theme }) => theme.fontSize.medium};
+    border: 3px solid ${({ theme }) => theme.color.black};
+    border-radius: 10px;
+    padding: 0.5rem;
+    padding-left: 1rem;
 
-//PropTypes
-SigninForm.propTypes = {
-  updateUser: PropTypes.func.isRequired,
-};
+    :focus {
+      outline: none;
+      border: 3px solid ${({ theme }) => theme.color.grey};
+    }
+  }
+`;

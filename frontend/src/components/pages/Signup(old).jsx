@@ -5,29 +5,37 @@ import { useState, useEffect } from "react";
 import { device } from "../../styles/devices";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
-import PropTypes from "prop-types";
 import Loader from "react-loader-spinner";
+import PropTypes from "prop-types";
 
 export default function SigninForm({ updateUser }) {
   const [email, setEmail] = useState("");
   const [showEmailLabel, setShowEmailLabel] = useState(false);
   const [password, setPassword] = useState("");
   const [showPasswordLabel, setShowPasswordLabel] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showConfirmPasswordLabel, setShowConfirmPasswordLabel] = useState(
+    false
+  );
   const [redirect, setRedirect] = useState(false);
+  const [loading, setLoading] = useState();
   useEffect(() => {
     email.length > 0 ? setShowEmailLabel(true) : setShowEmailLabel(false);
     password.length > 0
       ? setShowPasswordLabel(true)
       : setShowPasswordLabel(false);
-  }, [email, password]);
-  const [loading, setLoading] = useState(false);
+    confirmPassword.length > 0
+      ? setShowConfirmPasswordLabel(true)
+      : setShowConfirmPasswordLabel(false);
+  }, [email, password, confirmPassword]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
     axios
-      .post("http://localhost:1337/auth/local", {
-        identifier: email,
+      .post("http://localhost:1337/auth/local/register", {
+        username: email,
+        email: email,
         password: password,
       })
       .then((response) => {
@@ -48,9 +56,9 @@ export default function SigninForm({ updateUser }) {
     return (
       <Container>
         <StyledForm onSubmit={handleSubmit}>
-          <Header>Sign in</Header>
+          <Header>Sign up</Header>
           <Input
-            // type="email"
+            type="email"
             label="email"
             name="email"
             placeholder="email"
@@ -69,18 +77,29 @@ export default function SigninForm({ updateUser }) {
             }}
             shown={showPasswordLabel}
           />
-          <StyledButton type="submit" disabled={loading}>
+          <Input
+            type="password"
+            label="confirm password"
+            name="confirmPassword"
+            placeholder="confirm password"
+            onChange={(e) => {
+              setConfirmPassword(e.target.value);
+            }}
+            shown={showConfirmPasswordLabel}
+          />
+
+          <StyledButton type="submit">
             {loading ? (
               <Loader type="ThreeDots" color="#414141" height={20} width={20} />
             ) : (
-              "Sign in"
+              "Sign up"
             )}
           </StyledButton>
         </StyledForm>
         <StyledSwitchContainer>
-          <Header inverted>New to Scoot?</Header>
+          <Header inverted>have an account?</Header>
           <StyledButton inverted type="button">
-            <Link to="/sign-up">sign up</Link>
+            <Link to="/sign-in">sign in</Link>
           </StyledButton>
         </StyledSwitchContainer>
       </Container>
@@ -112,6 +131,7 @@ const StyledSwitchContainer = styled.div`
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   margin-bottom: 3rem;
   padding-right: 2rem;
 `;
