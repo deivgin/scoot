@@ -11,7 +11,7 @@ import {
 
 function Loader() {
   const { progress } = useProgress();
-  return <Html center>{progress} % loaded</Html>;
+  return <Html center>{Math.floor(progress)} % loaded</Html>;
 }
 
 export default function Scene() {

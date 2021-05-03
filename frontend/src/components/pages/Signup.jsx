@@ -53,6 +53,9 @@ export default function SignUp({ updateUser }) {
     return (
       <FormStyles>
         <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+          <h2>
+            Already a member? <Link to="/sign-in">Sign In</Link>
+          </h2>
           <h1>Sign Up</h1>
           <div>
             <input {...register("firstName", { required: true })} />
@@ -113,9 +116,9 @@ export default function SignUp({ updateUser }) {
             <label htmlFor="zipCode">Zip Code</label>
           </div>
 
-          <Button type="submit">
+          <Button disabled={loading} type="submit">
             {loading ? (
-              <Loader type="ThreeDots" color="#414141" height={20} width={20} />
+              <Loader type="ThreeDots" color="#414141" height={20} width={60} />
             ) : (
               "Sign up"
             )}

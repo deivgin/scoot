@@ -11,7 +11,7 @@ import Button from "../../elements/Button";
 import useViewport from "../../../hooks/useViewport";
 import { size } from "../../../styles/devices";
 
-export default function Header() {
+export default function Header({ user }) {
   const [navOpen, setNavOpen] = useState(false);
   const menuRef = useRef();
   const location = useLocation();
@@ -42,6 +42,7 @@ export default function Header() {
           (style, item) =>
             item && (
               <MenuNav
+                user={user}
                 style={style}
                 open={navOpen}
                 setOpen={setNavOpen}

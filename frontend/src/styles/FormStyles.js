@@ -1,20 +1,15 @@
 import styled from "styled-components";
-import { device } from "./devices";
 
 const FormStyles = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-self: center;
+  display: flex;
+  justify-content: center;
   align-self: center;
-  margin-top: 3rem;
-  @media ${device.mobileL} {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-  }
+  margin: 3rem 0;
 
   div {
     display: flex;
     flex-direction: column-reverse;
+    margin-bottom: 2rem;
   }
 
   h1 {
@@ -22,6 +17,12 @@ const FormStyles = styled.div`
     color: ${({ theme, inverted }) =>
       inverted ? theme.color.white : theme.color.black};
     padding: 2rem;
+    text-align: center;
+  }
+
+  a {
+    color: ${({ theme }) => theme.color.greyDark};
+    text-decoration: underline;
   }
 
   label {
@@ -42,6 +43,18 @@ const FormStyles = styled.div`
     :focus {
       outline: none;
       border: 3px solid ${({ theme }) => theme.color.grey};
+    }
+  }
+
+  button {
+    width: 100%;
+    font-size: ${({ theme }) => theme.fontSize.medium};
+    margin-top: 1rem;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    > * {
+      margin: 0;
     }
   }
 `;

@@ -11,7 +11,7 @@ export default function App() {
   console.log("user", user);
   return (
     <Router>
-      <Header />
+      <Header user={user} />
       <Main>
         <Switch>
           <Route exact path="/">

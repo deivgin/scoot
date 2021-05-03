@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { animated } from "react-spring";
 
-export default function MenuNav({ open, setOpen, menuRef, style }) {
+export default function MenuNav({ open, setOpen, menuRef, style, user }) {
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
@@ -25,9 +25,15 @@ export default function MenuNav({ open, setOpen, menuRef, style }) {
             </Link>
           </li>
           <li>
-            <Link to="/sign-in" onClick={() => setOpen(false)}>
-              Sign in
-            </Link>
+            {user ? (
+              <Link to="/profile" onClick={() => setOpen(false)}>
+                Profile
+              </Link>
+            ) : (
+              <Link to="/sign-in" onClick={() => setOpen(false)}>
+                Sign in
+              </Link>
+            )}
           </li>
         </ul>
       </Nav>

@@ -21,7 +21,7 @@ export default function SignUp({ updateUser }) {
     console.log(data);
     setLoading(true);
     axios
-      .post("http://localhost:1337/auth/local", {
+      .post(`http://localhost:1337/auth/local`, {
         identifier: data.email,
         password: data.password,
       })
@@ -44,6 +44,9 @@ export default function SignUp({ updateUser }) {
     return (
       <FormStyles>
         <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+          <h2>
+            New to ScooT? <Link to="/sign-up">Sign Up</Link>
+          </h2>
           <h1>Sign In</h1>
 
           <div>
@@ -59,9 +62,9 @@ export default function SignUp({ updateUser }) {
             <label htmlFor="password">Password</label>
           </div>
 
-          <Button type="submit">
+          <Button disabled={loading} type="submit">
             {loading ? (
-              <Loader type="ThreeDots" color="#414141" height={20} width={20} />
+              <Loader type="ThreeDots" color="#414141" height={20} width={60} />
             ) : (
               "Sign In"
             )}
@@ -70,6 +73,7 @@ export default function SignUp({ updateUser }) {
       </FormStyles>
     );
 }
+
 //PropTypes
 SignUp.propTypes = {
   updateUser: PropTypes.func.isRequired,
