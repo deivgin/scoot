@@ -6,6 +6,11 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
+  #root{
+    position:relative;
+    min-height: 100vh;
+  }
+
   html{
     font-size: 62.5%;
   }

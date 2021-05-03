@@ -72,13 +72,13 @@ export default function SigninForm({ updateUser }) {
             "Sign in"
           )}
         </StyledButton>
-        <StyledSwitchContainer>
-          <Header>New to Scoot?</Header>
-          <StyledButton disabled inverted type="button">
-            <Link to="/sign-up">sign up</Link>
-          </StyledButton>
-        </StyledSwitchContainer>
       </StyledForm>
+      <StyledSwitchContainer>
+        <Header inverted>New to Scoot?</Header>
+        <StyledButton inverted type="button">
+          <Link to="/sign-up">sign up</Link>
+        </StyledButton>
+      </StyledSwitchContainer>
     </Container>
   );
 }
@@ -87,22 +87,43 @@ export default function SigninForm({ updateUser }) {
 const Container = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
-
-  @media ${device.tablet} {
+  justify-self: center;
+  align-self: center;
+  margin-top: 3rem;
+  @media ${device.mobileL} {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
   }
 `;
 
-const StyledSwitchContainer = styled.div``;
-
-const StyledForm = styled.form`
-  padding: 8rem;
+const StyledSwitchContainer = styled.div`
+  background-color: ${({ theme }) => theme.color.black};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  border-radius: 0 10px 10px 0;
 `;
 
-const Header = styled.h1``;
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  padding-right: 2rem;
+`;
 
-const StyledButton = styled(Button)``;
+const Header = styled.h1`
+  font-size: ${({ theme }) => theme.fontSize.exLarge};
+  color: ${({ theme, inverted }) =>
+    inverted ? theme.color.white : theme.color.black};
+  padding: 2rem;
+`;
+
+const StyledButton = styled(Button)`
+  margin: 0 3rem;
+  margin-top: 3rem;
+`;
 
 //PropTypes
 SigninForm.propTypes = {

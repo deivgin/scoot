@@ -24,6 +24,6 @@ const Container = styled.section`
 
   @media ${device.tablet} {
     grid-template-columns: 1fr;
-    grid-template-rows: 75vh 80vh;
+    grid-template-rows: 75vh 1fr;
   }
 `;

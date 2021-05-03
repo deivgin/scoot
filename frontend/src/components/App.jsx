@@ -41,5 +41,7 @@ export default function App() {
 }
 
 const Main = styled.main`
-  height: 100%;
+  display: grid;
+  padding-bottom: 2.5rem;
+  min-height: 80vh;
 `;
