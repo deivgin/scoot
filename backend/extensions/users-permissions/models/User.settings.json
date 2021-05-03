@@ -59,7 +59,28 @@
       "plugin": "users-permissions",
       "configurable": false
     },
-    "name": {
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    },
+    "phoneNumber": {
+      "type": "string"
+    },
+    "zipCode": {
       "type": "string"
     }
   }

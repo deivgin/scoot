@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Home, Shop, Signin, SignUp, Profile } from "./pages";
+import { Home, Shop, SignIn, SignUp, Profile } from "./pages";
 import Header from "./modules/Header/Header";
 import Footer from "./modules/Footer";
 import { useState } from "react";
@@ -21,7 +21,7 @@ export default function App() {
             <Shop />
           </Route>
           <Route path="/sign-in">
-            <Signin updateUser={(user) => setUser(user)} />
+            <SignIn updateUser={(user) => setUser(user)} />
           </Route>
           <Route path="/sign-up">
             <SignUp updateUser={(user) => setUser(user)} />

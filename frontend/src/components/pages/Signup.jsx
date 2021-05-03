@@ -1,107 +1,130 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import { device } from "../../styles/devices";
 import Button from "../elements/Button";
+import axios from "axios";
+import Loader from "react-loader-spinner";
+import PropTypes from "prop-types";
+import { Link, Redirect } from "react-router-dom";
+import FormStyles from "../../styles/FormStyles";
 
-export default function SignUp() {
-  const { register, handleSubmit } = useForm();
+export default function SignUp({ updateUser }) {
+  const [loading, setLoading] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
 
   const onSubmit = (data) => {
+    setLoading(true);
     console.log(data);
+    axios
+      .post("http://localhost:1337/auth/local/register", {
+        username: data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        password: data.password,
+        country: data.country,
+        address: data.address,
+        city: data.city,
+        region: data.region,
+        phoneNumber: data.phoneNumber,
+        zipCode: data.zipCode,
+      })
+      .then((response) => {
+        // Handle success.
+        updateUser(response.data);
+        setLoading(false);
+        setRedirect(true);
+      })
+      .catch((error) => {
+        // Handle error.
+        console.log("An error occurred:", error.response);
+        setLoading(false);
+      });
   };
 
-  return (
-    <Styles>
-      <form onSubmit={handleSubmit((data) => onSubmit(data))}>
-        <h1>Sign Up</h1>
-        <div>
-          <input name="firstName" type="text" />
-          <label htmlFor="firstName">First Name</label>
-        </div>
+  if (redirect) {
+    return <Redirect to="/" />;
+  } else
+    return (
+      <FormStyles>
+        <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+          <h1>Sign Up</h1>
+          <div>
+            <input {...register("firstName", { required: true })} />
+            <label htmlFor="firstName">First Name</label>
+            {errors.firstName && <p>required</p>}
+          </div>
 
-        <div>
-          <input name="lastName" type="text" />
-          <label htmlFor="lastName">Last Name</label>
-        </div>
+          <div>
+            <input {...register("lastName", { required: true })} />
+            <label htmlFor="lastName">Last Name</label>
+          </div>
 
-        <div>
-          <input name="country" />
-          <label htmlFor="country">Country</label>
-        </div>
+          <div>
+            <input {...register("email", { required: true })} />
+            <label htmlFor="email">Email</label>
+          </div>
 
-        <div>
-          <input name="address" type="text" />
-          <label htmlFor="address">Address</label>
-        </div>
+          <div>
+            <input
+              type="password"
+              {...register("password", { required: true })}
+            />
+            <label htmlFor="password">Password</label>
+          </div>
 
-        <div>
-          <input name="city" type="text" />
-          <label htmlFor="city">City</label>
-        </div>
+          {/* <div>
+            <input {...register("confirmPassword", { required: true })} />
+            <label htmlFor="confirmPassword">Confirm password</label>
+          </div> */}
 
-        <div>
-          <input name="region" type="text" />
-          <label htmlFor="region">State/Province/Region</label>
-        </div>
+          <div>
+            <input {...register("country", { required: true })} />
+            <label htmlFor="country">Country</label>
+          </div>
 
-        <div>
-          <input name="phoneNumber" type="number" />
-          <label htmlFor="phoneNumber">Phone number</label>
-        </div>
+          <div>
+            <input {...register("address", { required: true })} />
+            <label htmlFor="address">Address</label>
+          </div>
 
-        <div>
-          <input name="zipCode" type="number" />
-          <label htmlFor="zipCode">Zip Code</label>
-        </div>
+          <div>
+            <input {...register("city", { required: true })} />
+            <label htmlFor="city">City</label>
+          </div>
 
-        <Button type="submit">Sign Up</Button>
-      </form>
-    </Styles>
-  );
+          <div>
+            <input {...register("region", { required: true })} />
+            <label htmlFor="region">State/Province/Region</label>
+          </div>
+
+          <div>
+            <input {...register("phoneNumber", { required: true })} />
+            <label htmlFor="phoneNumber">Phone number</label>
+          </div>
+
+          <div>
+            <input {...register("zipCode", { required: true })} />
+            <label htmlFor="zipCode">Zip Code</label>
+          </div>
+
+          <Button type="submit">
+            {loading ? (
+              <Loader type="ThreeDots" color="#414141" height={20} width={20} />
+            ) : (
+              "Sign up"
+            )}
+          </Button>
+        </form>
+      </FormStyles>
+    );
 }
-
-//Styles
-const Styles = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-self: center;
-  align-self: center;
-  margin-top: 3rem;
-  @media ${device.mobileL} {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-  }
-
-  div {
-    display: flex;
-    flex-direction: column-reverse;
-  }
-
-  h1 {
-    font-size: ${({ theme }) => theme.fontSize.exLarge};
-    color: ${({ theme, inverted }) =>
-      inverted ? theme.color.white : theme.color.black};
-    padding: 2rem;
-  }
-
-  label {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-    transition: ease-in-out 0.2s;
-    //transform: ${({ shown }) => (!shown ? "translateY(2rem)" : null)};
-    z-index: -1;
-  }
-
-  input {
-    font-size: ${({ theme }) => theme.fontSize.medium};
-    border: 3px solid ${({ theme }) => theme.color.black};
-    border-radius: 10px;
-    padding: 0.5rem;
-    padding-left: 1rem;
-
-    :focus {
-      outline: none;
-      border: 3px solid ${({ theme }) => theme.color.grey};
-    }
-  }
-`;
+//PropTypes
+SignUp.propTypes = {
+  updateUser: PropTypes.func.isRequired,
+};

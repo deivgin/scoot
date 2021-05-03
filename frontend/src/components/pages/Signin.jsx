@@ -1,34 +1,29 @@
-import styled from "styled-components";
-import Input from "../elements/Input";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import Button from "../elements/Button";
-import { useState, useEffect } from "react";
-import { device } from "../../styles/devices";
-import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
-import PropTypes from "prop-types";
 import Loader from "react-loader-spinner";
+import PropTypes from "prop-types";
+import { Link, Redirect } from "react-router-dom";
+import FormStyles from "../../styles/FormStyles";
 
-export default function SigninForm({ updateUser }) {
-  const [email, setEmail] = useState("");
-  const [showEmailLabel, setShowEmailLabel] = useState(false);
-  const [password, setPassword] = useState("");
-  const [showPasswordLabel, setShowPasswordLabel] = useState(false);
-  const [redirect, setRedirect] = useState(false);
-  useEffect(() => {
-    email.length > 0 ? setShowEmailLabel(true) : setShowEmailLabel(false);
-    password.length > 0
-      ? setShowPasswordLabel(true)
-      : setShowPasswordLabel(false);
-  }, [email, password]);
+export default function SignUp({ updateUser }) {
   const [loading, setLoading] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = (data) => {
+    setLoading(true);
+    console.log(data);
     setLoading(true);
     axios
       .post("http://localhost:1337/auth/local", {
-        identifier: email,
-        password: password,
+        identifier: data.email,
+        password: data.password,
       })
       .then((response) => {
         // Handle success.
@@ -42,93 +37,40 @@ export default function SigninForm({ updateUser }) {
         setLoading(false);
       });
   };
+
   if (redirect) {
     return <Redirect to="/" />;
   } else
     return (
-      <Container>
-        <StyledForm onSubmit={handleSubmit}>
-          <Header>Sign in</Header>
-          <Input
-            // type="email"
-            label="email"
-            name="email"
-            placeholder="email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-            shown={showEmailLabel}
-          />
-          <Input
-            type="password"
-            label="password"
-            name="password"
-            placeholder="password"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            shown={showPasswordLabel}
-          />
-          <StyledButton type="submit" disabled={loading}>
+      <FormStyles>
+        <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+          <h1>Sign In</h1>
+
+          <div>
+            <input {...register("email", { required: true })} />
+            <label htmlFor="email">Email</label>
+          </div>
+
+          <div>
+            <input
+              type="password"
+              {...register("password", { required: true })}
+            />
+            <label htmlFor="password">Password</label>
+          </div>
+
+          <Button type="submit">
             {loading ? (
               <Loader type="ThreeDots" color="#414141" height={20} width={20} />
             ) : (
-              "Sign in"
+              "Sign In"
             )}
-          </StyledButton>
-        </StyledForm>
-        <StyledSwitchContainer>
-          <Header inverted>New to Scoot?</Header>
-          <StyledButton inverted type="button">
-            <Link to="/sign-up">sign up</Link>
-          </StyledButton>
-        </StyledSwitchContainer>
-      </Container>
+          </Button>
+        </form>
+      </FormStyles>
     );
 }
-
-//Styles
-const Container = styled.section`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-self: center;
-  align-self: center;
-  margin-top: 3rem;
-  @media ${device.mobileL} {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-  }
-`;
-
-const StyledSwitchContainer = styled.div`
-  background-color: ${({ theme }) => theme.color.black};
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-bottom: 3rem;
-  border-radius: 0 10px 10px 0;
-`;
-
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 3rem;
-  padding-right: 2rem;
-`;
-
-const Header = styled.h1`
-  font-size: ${({ theme }) => theme.fontSize.exLarge};
-  color: ${({ theme, inverted }) =>
-    inverted ? theme.color.white : theme.color.black};
-  padding: 2rem;
-`;
-
-const StyledButton = styled(Button)`
-  margin: 0 3rem;
-  margin-top: 3rem;
-`;
-
 //PropTypes
-SigninForm.propTypes = {
+SignUp.propTypes = {
   updateUser: PropTypes.func.isRequired,
 };
