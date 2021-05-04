@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { changeValue, calcTotal } from "../../../redux/Product/product.actions";
+import { addToCart } from "../../../redux/Cart/cart.actions";
 import Options from "./Options";
 import Button from "../../elements/Button";
 import Loader from "react-loader-spinner";
@@ -11,6 +12,7 @@ export default function ShopProperty() {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
   const product = useSelector((state) => state.product);
+  const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -62,7 +64,9 @@ export default function ShopProperty() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("submit");
+    setIsLoading(true);
+    dispatch(addToCart(product));
+    setIsLoading(false);
   };
   return (
     <>

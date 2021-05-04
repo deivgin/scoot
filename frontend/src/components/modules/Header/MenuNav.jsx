@@ -15,6 +15,11 @@ export default function MenuNav({ open, setOpen, menuRef, style, user }) {
       <Nav style={style} open={open} ref={menuRef}>
         <ul>
           <li>
+            <Link to="/cart" onClick={() => setOpen(false)}>
+              Cart
+            </Link>
+          </li>
+          <li>
             <Link to="/" onClick={() => setOpen(false)}>
               Home
             </Link>

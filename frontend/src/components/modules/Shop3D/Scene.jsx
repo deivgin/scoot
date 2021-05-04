@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import Model from "./model";
+import Model from "../../elements/model";
 import {
   ContactShadows,
   Environment,

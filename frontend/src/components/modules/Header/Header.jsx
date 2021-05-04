@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import styled from "styled-components";
 import Logo from "../../elements/Logo";
-import Cart from "../../elements/Cart";
+import { CartButton } from "../Cart";
 import Hamburg from "./Hamburg";
 import MenuNav from "./MenuNav";
 import { BiUser } from "react-icons/bi";
@@ -32,7 +32,8 @@ export default function Header({ user }) {
             <Link to="shop">shop</Link>
           </Button>
         )}
-        <Cart />
+        {location.pathname !== "/cart" && <CartButton />}
+
         <ProfileButton>
           <Link to="/profile">
             <BiUser />

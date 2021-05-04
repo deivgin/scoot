@@ -1,11 +1,16 @@
 import styled from "styled-components";
 import { FiShoppingCart } from "react-icons/fi";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-export default function Cart() {
+export default function CartButton() {
+  const cartItems = useSelector((state) => state.cart.items);
   return (
     <StyledCart>
-      <Icon />
-      <Counter>0</Counter>
+      <Link to="/cart">
+        <Icon />
+        <Counter>{cartItems.length}</Counter>
+      </Link>
     </StyledCart>
   );
 }

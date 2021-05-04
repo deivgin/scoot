@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Home, Shop, SignIn, SignUp, Profile } from "./pages";
+import { Home, Shop, SignIn, SignUp, Profile, Cart } from "./pages";
 import Header from "./modules/Header/Header";
 import Footer from "./modules/Footer";
 import { useState } from "react";
@@ -33,6 +33,9 @@ export default function App() {
           >
             <Profile user={user} />
           </ProtectedRoute>
+          <Route path="/cart">
+            <Cart user={user} />
+          </Route>
         </Switch>
       </Main>
       <Footer />
