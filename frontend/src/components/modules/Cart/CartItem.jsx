@@ -4,6 +4,7 @@ import { device } from "../../../styles/devices";
 import CartItemInfo from "./CartItemInfo";
 import { useDispatch } from "react-redux";
 import { removeFromCart } from "../../../redux/Cart/cart.actions";
+import { TiDeleteOutline } from "react-icons/ti";
 
 export default function CartTable({ product }) {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ export default function CartTable({ product }) {
       <PriceAndRemove>
         <p>Price: {product.price}€</p>
         <button onClick={() => dispatch(removeFromCart(product))}>
-          Remove
+          <TiDeleteOutline />
         </button>
       </PriceAndRemove>
     </Container>
@@ -63,14 +64,27 @@ const PriceAndRemove = styled.div`
   width: 100%;
 
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 
   font-size: ${({ theme }) => theme.fontSize.medium};
   @media ${device.mobileL} {
     grid-column: left-start / right-end;
-    flex-direction: row;
     font-size: ${({ theme }) => theme.fontSize.large};
+  }
+
+  button {
+    background-color: transparent;
+    border: none;
+    font-size: ${({ theme }) => theme.fontSize.small};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    :hover {
+      color: ${({ theme }) => theme.color.red};
+    }
   }
 `;
 

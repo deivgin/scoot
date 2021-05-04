@@ -9,7 +9,7 @@ export default function CartTotal({ total, length }) {
       {length === 0 ? (
         <>
           <h1>Cart empty</h1>
-          <StyledButton>
+          <StyledButton inverted>
             <Link to="shop">Buy a scooter</Link>
           </StyledButton>
         </>

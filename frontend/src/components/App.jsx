@@ -8,7 +8,6 @@ import ProtectedRoute from "./elements/ProtectedRoute";
 
 export default function App() {
   const [user, setUser] = useState(null);
-  console.log("user", user);
   return (
     <Router>
       <Header user={user} />

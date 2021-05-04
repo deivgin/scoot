@@ -12,7 +12,6 @@ export default function ShopProperty() {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
   const product = useSelector((state) => state.product);
-  const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {

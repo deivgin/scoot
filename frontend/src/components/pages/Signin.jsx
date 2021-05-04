@@ -18,8 +18,6 @@ export default function SignUp({ updateUser }) {
 
   const onSubmit = (data) => {
     setLoading(true);
-    console.log(data);
-    setLoading(true);
     axios
       .post(`http://localhost:1337/auth/local`, {
         identifier: data.email,
