@@ -8,9 +8,12 @@ import { TiDeleteOutline } from "react-icons/ti";
 
 export default function CartTable({ product }) {
   const dispatch = useDispatch();
+  const material = product.options.find((item) => item.name === "material");
+  console.log(material);
+
   return (
     <Container>
-      <ProductImage>Image</ProductImage>
+      <ProductImage src={`http://localhost:1337${material.data.image.url}`} />
       <CartItemInfo options={product.options} />
       <PriceAndRemove>
         <p>Price: {product.price}€</p>
@@ -48,9 +51,11 @@ const Container = styled.div`
   }
 `;
 
-const ProductImage = styled.div`
+const ProductImage = styled.img`
   grid-column: image-start / image-end;
   grid-row: image-start / image-end;
+  width: 25rem;
+  height: 15rem;
 
   @media ${device.mobileL} {
     grid-column: left-start / left-end;

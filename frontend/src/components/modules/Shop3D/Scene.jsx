@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 // import Model from "../../elements/model";
 import Model from "../../elements/model1.5";
