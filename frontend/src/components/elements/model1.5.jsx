@@ -23,13 +23,13 @@ export default function Model(props) {
         geometry={nodes.scooter_01003.geometry}
         material={nodes.scooter_01003.material}
       />
-      {props.materialType === "Basic material" && (
+      {props.materialType.data.name === "Basic material" && (
         <mesh
           geometry={nodes.scooter_basic.geometry}
           material={nodes.scooter_basic.material}
         />
       )}
-      {props.materialType === "Hot Pink Steel" && (
+      {props.materialType.data.name === "Hot Pink Steel" && (
         <mesh
           geometry={nodes.scooter_01003_1.geometry}
           material={materials.Pink}

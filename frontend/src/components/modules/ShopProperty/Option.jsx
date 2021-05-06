@@ -2,12 +2,11 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 export default function Option({ name, checked, price, image, ...props }) {
-  console.log(image);
   return (
     <Container active={checked}>
       <StyledInput type="radio" name="option" {...props} />
       <StyledLabel htmlFor="option">{name}</StyledLabel>
-      <StyledImage active={checked} src={image.url} />
+      <StyledImage active={checked} />
       <StyledPrice>
         <span>{price}€</span>
       </StyledPrice>
