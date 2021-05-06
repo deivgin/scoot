@@ -64,6 +64,7 @@ export default function Options({ tabData, handleTabs }) {
               key={item.id}
               name={item.name}
               price={item.price}
+              image={item.image}
               value={JSON.stringify(item)}
               checked={item.name === currTabProduct.data.name}
               onChange={handleInputChange}

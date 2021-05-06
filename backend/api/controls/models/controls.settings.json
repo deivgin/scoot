@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "controls",
   "info": {
-    "name": "Controls"
+    "name": "Controls",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -15,6 +16,17 @@
     },
     "price": {
       "type": "decimal"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
     }
   }
 }

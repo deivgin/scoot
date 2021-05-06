@@ -1,12 +1,13 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-export default function Option({ name, checked, price, ...props }) {
+export default function Option({ name, checked, price, image, ...props }) {
+  console.log(image);
   return (
     <Container active={checked}>
       <StyledInput type="radio" name="option" {...props} />
       <StyledLabel htmlFor="option">{name}</StyledLabel>
-      <StyledImage active={checked} />
+      <StyledImage active={checked} src={image.url} />
       <StyledPrice>
         <span>{price}€</span>
       </StyledPrice>
@@ -47,10 +48,9 @@ const StyledLabel = styled.label`
   padding-bottom: 1rem;
 `;
 
-const StyledImage = styled.div`
+const StyledImage = styled.img`
   width: 25rem;
   height: 15rem;
-  background: hotpink;
   border: 2px solid
     ${({ active, theme }) => (active ? theme.color.white : theme.color.black)};
   border-radius: 10px;
