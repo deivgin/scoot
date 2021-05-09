@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { changeValue, calcTotal } from "../../../redux/Product/product.actions";
+import { getProductData, setCurrTab } from "../../../redux/Tabs/tabs.actions";
 import { addToCart } from "../../../redux/Cart/cart.actions";
 import Options from "./Options";
 import Button from "../../elements/Button";
@@ -10,8 +11,8 @@ import { device } from "../../../styles/devices";
 
 export default function ShopProperty() {
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState(null);
   const product = useSelector((state) => state.product);
+  const tabs = useSelector((state) => state.tabs);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,15 +27,17 @@ export default function ShopProperty() {
         const controlsData = await controlsResponse.json();
         const materialResponse = await fetch(`${url}/materials`);
         const materialData = await materialResponse.json();
-        setData({
-          currTab: { name: "material", data: materialData },
-          tabs: [
-            { name: "material", data: materialData },
-            { name: "wheels", data: wheelsData },
-            { name: "speed", data: speedData },
-            { name: "controls", data: controlsData },
-          ],
-        });
+        dispatch(
+          getProductData({
+            currTab: { name: "material", data: materialData },
+            tabs: [
+              { name: "material", data: materialData },
+              { name: "wheels", data: wheelsData },
+              { name: "speed", data: speedData },
+              { name: "controls", data: controlsData },
+            ],
+          })
+        );
         setIsLoading(false);
       } catch (err) {
         console.log(err);
@@ -46,7 +49,7 @@ export default function ShopProperty() {
   const setDefaultProduct = () => {
     dispatch(
       changeValue(
-        data.tabs.map((item) => ({
+        tabs.tabs.map((item) => ({
           name: item.name,
           data: item.data[0],
         }))
@@ -55,10 +58,10 @@ export default function ShopProperty() {
     dispatch(calcTotal());
   };
 
-  data && !product.options && setDefaultProduct();
+  tabs && !product.options && setDefaultProduct();
 
   const handleTabs = (tab) => {
-    setData({ ...data, currTab: tab });
+    dispatch(setCurrTab(tab));
   };
 
   const handleSubmit = (e) => {
@@ -70,7 +73,7 @@ export default function ShopProperty() {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        {isLoading || !data ? (
+        {isLoading || !tabs ? (
           <StyledLoader
             type="ThreeDots"
             color="#414141"
@@ -79,7 +82,7 @@ export default function ShopProperty() {
           />
         ) : (
           <>
-            <Options tabData={data} handleTabs={handleTabs} />
+            <Options tabData={tabs} handleTabs={handleTabs} />
             <Price>{product.price}€</Price>
             <OrderButton>order</OrderButton>
           </>
