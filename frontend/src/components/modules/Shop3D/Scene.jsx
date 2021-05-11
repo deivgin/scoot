@@ -1,7 +1,6 @@
 import { Suspense, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-// import Model from "../../elements/model";
-import Model from "../../elements/model1.5";
+import Model from "../../elements/model";
 import {
   ContactShadows,
   Environment,
@@ -20,8 +19,10 @@ function Loader() {
 export default function Scene() {
   const product = useSelector((state) => state.product);
   const controls = useRef();
-  const findMaterial = () =>
-    product.options.find((item) => item.name === "material");
+  const findMaterial = () => ({
+    material: product.options.find((item) => item.name === "material"),
+    controls: product.options.find((item) => item.name === "controls"),
+  });
   const tabs = useSelector((state) => state.tabs);
 
   const { position, rotation } = useSpring({
@@ -32,12 +33,14 @@ export default function Scene() {
   useEffect(() => {
     if (tabs && controls.current) {
       if (tabs.currTab.name !== "material") {
+        controls.current.autoRotate = false;
         controls.current.enableRotate = false;
         controls.current.reset();
         controls.current.enableDamping = false;
       } else {
         controls.current.enableRotate = true;
         controls.current.enableDamping = true;
+        controls.current.autoRotate = true;
       }
     }
   }, [tabs, controls]);
