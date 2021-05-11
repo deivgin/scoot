@@ -30,15 +30,17 @@ export default function Scene() {
   });
 
   useEffect(() => {
-    if (tabs && tabs.currTab.name !== "material") {
-      controls.current.enableRotate = false;
-      controls.current.reset();
-      controls.current.enableDamping = false;
-    } else if (tabs) {
-      controls.current.enableRotate = true;
-      controls.current.enableDamping = true;
+    if (tabs && controls.current) {
+      if (tabs.currTab.name !== "material") {
+        controls.current.enableRotate = false;
+        controls.current.reset();
+        controls.current.enableDamping = false;
+      } else {
+        controls.current.enableRotate = true;
+        controls.current.enableDamping = true;
+      }
     }
-  }, [tabs]);
+  }, [tabs, controls]);
 
   return (
     <Canvas shadows dpr={[1, 2]} camera={{ fov: 40, position: [0, 0, 2] }}>
@@ -68,7 +70,7 @@ export default function Scene() {
         maxPolarAngle={Math.PI / 2}
         enableZoom={false}
         enablePan={false}
-        dampingFactor={0.1}
+        dampingFactor={0.15}
       />
     </Canvas>
   );
