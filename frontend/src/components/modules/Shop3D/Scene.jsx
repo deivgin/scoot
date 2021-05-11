@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 // import Model from "../../elements/model";
 import Model from "../../elements/model1.5";
@@ -10,6 +10,7 @@ import {
   useProgress,
 } from "@react-three/drei";
 import { useSelector } from "react-redux";
+import { useSpring } from "@react-spring/three";
 
 function Loader() {
   const { progress } = useProgress();
@@ -17,34 +18,36 @@ function Loader() {
 }
 
 export default function Scene() {
-  const [camera, setCamera] = useState([0, 0, 2]);
   const product = useSelector((state) => state.product);
-  const tabs = useSelector((state) => state.tabs);
+  const controls = useRef();
   const findMaterial = () =>
     product.options.find((item) => item.name === "material");
+  const tabs = useSelector((state) => state.tabs);
+
+  const { position, rotation } = useSpring({
+    position: tabs && tabs.currTab.position,
+    rotation: tabs && tabs.currTab.rotation,
+  });
 
   useEffect(() => {
-    tabs && handleCameraPosition(tabs.currTab.name);
+    if (tabs && tabs.currTab.name !== "material") {
+      controls.current.enableRotate = false;
+      controls.current.reset();
+      controls.current.enableDamping = false;
+    } else if (tabs) {
+      controls.current.enableRotate = true;
+      controls.current.enableDamping = true;
+    }
   }, [tabs]);
 
-  const handleCameraPosition = (tabName) => {
-    switch (tabName) {
-      case "wheels":
-        setCamera([0, 5, 0]);
-        console.log(camera);
-        break;
-      default:
-        return;
-    }
-  };
-
   return (
-    <Canvas shadows dpr={[1, 2]} camera={{ fov: 40, position: camera }}>
+    <Canvas shadows dpr={[1, 2]} camera={{ fov: 40, position: [0, 0, 2] }}>
       <ambientLight intensity={0.7} />
       <spotLight intensity={0.5} position={[10, 15, 10]} castShadow />
       <Suspense fallback={<Loader />}>
         <Model
-          position={[0, -0.5, 0]}
+          rotation={rotation}
+          position={position}
           materialType={product.options && findMaterial()}
         />
         <Environment preset="city" />
@@ -58,11 +61,14 @@ export default function Scene() {
           far={0.8}
         />
       </Suspense>
+
       <OrbitControls
+        ref={controls}
         minPolarAngle={Math.PI / 2}
         maxPolarAngle={Math.PI / 2}
         enableZoom={false}
         enablePan={false}
+        dampingFactor={0.1}
       />
     </Canvas>
   );

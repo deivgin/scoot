@@ -29,12 +29,37 @@ export default function ShopProperty() {
         const materialData = await materialResponse.json();
         dispatch(
           getProductData({
-            currTab: { name: "material", data: materialData },
+            currTab: {
+              name: "material",
+              data: materialData,
+              position: [0, -0.5, 0],
+              rotation: [0, 0, 0],
+            },
             tabs: [
-              { name: "material", data: materialData },
-              { name: "wheels", data: wheelsData },
-              { name: "speed", data: speedData },
-              { name: "controls", data: controlsData },
+              {
+                name: "material",
+                data: materialData,
+                position: [0, -0.5, 0],
+                rotation: [0, 0, 0],
+              },
+              {
+                name: "wheels",
+                data: wheelsData,
+                position: [0.35, -0.1, 1.5],
+                rotation: [0, 0, 0],
+              },
+              {
+                name: "speed",
+                data: speedData,
+                position: [0.01, -0.7, 1],
+                rotation: [1, 1.6, 0],
+              },
+              {
+                name: "controls",
+                data: controlsData,
+                position: [-0.1, -1, 1.1],
+                rotation: [0.5, 1, 0],
+              },
             ],
           })
         );
