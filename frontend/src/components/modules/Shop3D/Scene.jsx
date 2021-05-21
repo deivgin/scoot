@@ -13,7 +13,11 @@ import { useSpring } from "@react-spring/three";
 
 function Loader() {
   const { progress } = useProgress();
-  return <Html center>{Math.floor(progress)} % loaded</Html>;
+  return (
+    <Html center style={{ fontSize: "3rem" }}>
+      {Math.floor(progress)} % loaded
+    </Html>
+  );
 }
 
 export default function Scene() {
@@ -48,7 +52,7 @@ export default function Scene() {
   return (
     <Canvas shadows dpr={[1, 2]} camera={{ fov: 40, position: [0, 0, 2] }}>
       <ambientLight intensity={0.7} />
-      <spotLight intensity={0.5} position={[10, 15, 10]} castShadow />
+      <spotLight intensity={1} position={[0, 0, 5]} castShadow />
       <Suspense fallback={<Loader />}>
         <Model
           rotation={rotation}
